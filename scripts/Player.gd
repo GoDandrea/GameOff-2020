@@ -4,12 +4,17 @@ const MOVE_SPEED = 3
 const MOUSE_SENS = 0.5
 
 const ROT_SENS = 2
+
+var stress
  
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
  
+onready var cursor = load("res://sprites/crosshair.png")
+
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	Input.set_custom_mouse_cursor(cursor)
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("zombies", "set_player", self)
  
