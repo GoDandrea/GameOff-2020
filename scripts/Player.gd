@@ -2,12 +2,12 @@ extends KinematicBody
 
 var GRAVITY = -24.8
 var vel = Vector3()
-var SPEED = 3 setget set_SPEED, get_SPEED
-const SPRINT_MOD = 1.5
-const DEACCEL = 5
+var SPEED = 2.5 setget set_SPEED, get_SPEED
+var SPRINT_MOD = 1.5 setget set_SPRINT, get_SPRINT
+var ACCEL = 0.01
 
 var MOUSE_SENS = 0.5
-var ROT_SENS = 2
+var ROT_SENS = 1.2
 
 var movement_vec = Vector3()
 var rot_degrees = 0
@@ -46,8 +46,6 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
-	if Input.is_action_pressed("restart"):
-		kill()
  
 func _physics_process(delta):
 	process_input(delta)
@@ -55,9 +53,8 @@ func _physics_process(delta):
 	process_UI(delta)
 
 
-func process_input(delta):
+func process_input(_delta):
 	
-	# Walking #################################
 	movement_vec = Vector3()
 	rot_degrees = 0
 	if Input.is_action_pressed("move_forward"):
@@ -68,8 +65,6 @@ func process_input(delta):
 		rot_degrees += ROT_SENS
 	if Input.is_action_pressed("move_right"):
 		rot_degrees -= ROT_SENS
-
-	# Sprinting ###############################
 	
 
 func process_movement(delta):
@@ -83,28 +78,28 @@ func process_movement(delta):
 		rotation_degrees.y += rot_degrees
 	move_and_collide(movement_vec * SPEED * delta)
 	
-	if Input.is_action_pressed("shoot") and !anim_player.is_playing():
-		anim_player.play("shoot")
-		var coll = raycast.get_collider()
-		if raycast.is_colliding() and coll.has_method("kill"):
-			coll.kill()
 
-func process_UI(delta):
+func process_UI(_delta):
 	pass
 
+func abort_sprint():
+	emit_signal("interrupt")
+	$Cooldown.start(5)
+
+func _on_Cooldown_timeout():
+	emit_signal("sprint_ready")
+
+# SETGET FUNCTIONS #############################################################
+# SPEED
 func set_SPEED(value):
 	SPEED = value
 
 func get_SPEED():
 	return SPEED
 
-func kill():
-	get_tree().reload_current_scene()
+# SPRINT_MOD
+func set_SPRINT(value):
+	SPRINT_MOD = value
 
-func abort_sprint():
-	emit_signal("interrupt")
-	$Cooldown.start(5)
-
-
-func _on_Cooldown_timeout():
-	emit_signal("sprint_ready")
+func get_SPRINT():
+	return SPRINT_MOD

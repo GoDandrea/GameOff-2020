@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fps_monster_sprites.png-f46da9cf5fc857280a4a80a4b9489e3f.stex"
+path="res://.import/label_new_game.png-29abe8ee44448388eb2217111a1a5814.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/fps_monster_sprites.png"
-dest_files=[ "res://.import/fps_monster_sprites.png-f46da9cf5fc857280a4a80a4b9489e3f.stex" ]
+source_file="res://sprites/label_new_game.png"
+dest_files=[ "res://.import/label_new_game.png-29abe8ee44448388eb2217111a1a5814.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fps_monster_sprites.png-f46da9cf5fc857280a4a80a4b9489e3f.stex"
+path="res://.import/label_continue.png-fdd97232cba5d6157d6ff200df1403ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/fps_monster_sprites.png"
-dest_files=[ "res://.import/fps_monster_sprites.png-f46da9cf5fc857280a4a80a4b9489e3f.stex" ]
+source_file="res://sprites/label_continue.png"
+dest_files=[ "res://.import/label_continue.png-fdd97232cba5d6157d6ff200df1403ec.stex" ]
 
 [params]
 
