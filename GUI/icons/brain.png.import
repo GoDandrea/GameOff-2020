@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/label_HP_bg.png-8f298df0806b34706e0b9e55a718e437.stex"
+path="res://.import/brain.png-a29fb4617db70df5c7d9bf9d427a3937.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GUI/Icons/label_HP_bg.png"
-dest_files=[ "res://.import/label_HP_bg.png-8f298df0806b34706e0b9e55a718e437.stex" ]
+source_file="res://GUI/icons/brain.png"
+dest_files=[ "res://.import/brain.png-a29fb4617db70df5c7d9bf9d427a3937.stex" ]
 
 [params]
 

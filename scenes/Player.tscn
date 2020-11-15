@@ -35,9 +35,6 @@ shape = SubResource( 1 )
 enabled = true
 cast_to = Vector3( 0, 0, -2000 )
 
-[node name="Camera" type="Camera" parent="."]
-current = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/shoot = SubResource( 2 )
 
@@ -82,5 +79,8 @@ script = ExtResource( 4 )
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Camera" type="Camera" parent="."]
+current = true
 [connection signal="timeout" from="Heartbeat" to="Heartbeat" method="_on_Heartbeat_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]

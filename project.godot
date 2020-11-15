@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderNodeUVpixelate",
+"language": "GDScript",
+"path": "res://scripts/pixelate.gd"
+} ]
 _global_script_class_icons={
-
+"VisualShaderNodeUVpixelate": ""
 }
 
 [application]
@@ -18,11 +23,6 @@ _global_script_class_icons={
 config/name="GameOff 2020"
 run/main_scene="res://levels/default.tscn"
 config/icon="res://icon.png"
-
-[display]
-
-window/size/width=1366
-window/size/height=768
 
 [input]
 
