@@ -20,8 +20,9 @@ var Breath
 var Balance
 var Blink
 
-signal interrupt
-signal sprint_ready
+signal interrupt		# if a sprint system fails, tells the other systems to force_fail()
+signal sprint_ready		# tells when the sprint cooldowwn is over
+signal input_heartbeat	# tells Heartbeat the player pressed shift
 
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
@@ -55,6 +56,9 @@ func _physics_process(delta):
 
 func process_input(_delta):
 	
+	if Input.is_action_just_pressed("heartbeat"):
+		emit_signal("input_heartbeat")
+	
 	movement_vec = Vector3()
 	rot_degrees = 0
 	if Input.is_action_pressed("move_forward"):
@@ -76,6 +80,7 @@ func process_movement(delta):
 	else:
 		movement_vec = movement_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		rotation_degrees.y += rot_degrees
+# warning-ignore:return_value_discarded
 	move_and_collide(movement_vec * SPEED * delta)
 	
 

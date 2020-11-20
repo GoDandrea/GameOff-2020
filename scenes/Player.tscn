@@ -83,4 +83,5 @@ one_shot = true
 [node name="Camera" type="Camera" parent="."]
 current = true
 [connection signal="timeout" from="Heartbeat" to="Heartbeat" method="_on_Heartbeat_timeout"]
+[connection signal="timeout" from="Breath" to="Breath" method="_on_Breath_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
