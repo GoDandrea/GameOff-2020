@@ -1,7 +1,6 @@
 extends KinematicBody
 
 var GRAVITY = -24.8
-var vel = Vector3()
 var SPEED = 2.5 setget set_SPEED, get_SPEED
 var SPRINT_MOD = 1.5 setget set_SPRINT, get_SPRINT
 var ACCEL = 0.01
@@ -11,10 +10,12 @@ var ROT_SENS = 1.2
 
 var movement_vec = Vector3()
 var rot_degrees = 0
+var collision
 
 var is_sprinting = false
 var stress = 0
- 
+
+# these will be assigned the nodes for each part of the sprint system
 var Heartbeat
 var Breath
 var Balance
@@ -57,7 +58,9 @@ func _physics_process(delta):
 func process_input(_delta):
 	
 	if Input.is_action_just_pressed("heartbeat"):
-		emit_signal("input_heartbeat")
+		# avoid queing input signals
+		if $Cooldown.is_stopped():
+			emit_signal("input_heartbeat")
 	
 	movement_vec = Vector3()
 	rot_degrees = 0
@@ -80,9 +83,11 @@ func process_movement(delta):
 	else:
 		movement_vec = movement_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		rotation_degrees.y += rot_degrees
-# warning-ignore:return_value_discarded
-	move_and_collide(movement_vec * SPEED * delta)
-	
+
+	# this collision data can be used to make better collision failures eventurally
+	collision = move_and_collide(movement_vec * SPEED * delta)
+	if collision and SPEED > 2.5:
+		abort_sprint()
 
 func process_UI(_delta):
 	pass
