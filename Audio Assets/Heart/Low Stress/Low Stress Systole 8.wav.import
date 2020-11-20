@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Low Stress Systole 8.wav-a469e12aad2041e4f2c9c8cfdaf3d04a.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Heart/Low Stress/Low Stress Systole 8.wav"
+dest_files=[ "res://.import/Low Stress Systole 8.wav-a469e12aad2041e4f2c9c8cfdaf3d04a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

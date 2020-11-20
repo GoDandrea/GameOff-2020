@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Low Stress Diastole 6.wav-d947a9e4a7575e77be9930676bbcc948.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 6.wav"
+dest_files=[ "res://.import/Low Stress Diastole 6.wav-d947a9e4a7575e77be9930676bbcc948.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
