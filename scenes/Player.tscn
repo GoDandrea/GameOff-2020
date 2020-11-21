@@ -68,20 +68,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Heartbeat" type="Timer" parent="."]
-script = ExtResource( 4 )
-
-[node name="Breath" type="Timer" parent="."]
-
-[node name="Balance" type="Node" parent="."]
-
-[node name="Blink" type="Node" parent="."]
-
-[node name="Cooldown" type="Timer" parent="."]
-one_shot = true
-
 [node name="Camera" type="Camera" parent="."]
 current = true
-[connection signal="timeout" from="Heartbeat" to="Heartbeat" method="_on_Heartbeat_timeout"]
-[connection signal="timeout" from="Breath" to="Breath" method="_on_Breath_timeout"]
-[connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
+
+[node name="SprintStates" type="Node" parent="."]
+
+[node name="Heartbeat" type="Timer" parent="SprintStates"]
+script = ExtResource( 4 )
+
+[node name="Breath" type="Timer" parent="SprintStates"]
+
+[node name="Balance" type="Node" parent="SprintStates"]
+
+[node name="Blink" type="Node" parent="SprintStates"]
+
+[node name="Cooldown" type="Timer" parent="SprintStates"]
+one_shot = true
+[connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]
+[connection signal="timeout" from="SprintStates/Breath" to="SprintStates/Breath" method="_on_Breath_timeout"]
+[connection signal="timeout" from="SprintStates/Cooldown" to="." method="_on_Cooldown_timeout"]

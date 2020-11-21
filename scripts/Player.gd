@@ -34,20 +34,25 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	Input.set_custom_mouse_cursor(cursor)
 	
-	Heartbeat = get_node("Heartbeat")
-	Breath = get_node("Breath")
-	Balance = get_node("Balance")
-	Blink = get_node("Blink")
+	Heartbeat = get_node("SprintStates/Heartbeat")
+	Breath = get_node("SprintStates/Breath")
+	Balance = get_node("SprintStates/Balance")
+	Blink = get_node("SprintStates/Blink")
 	
 	Heartbeat.connect("sprint_fail", self, "abort_sprint")
 	
-	yield(get_tree(), "idle_frame")
-	get_tree().call_group("zombies", "set_player", self)
+	# make_audio_players()
+	# audio manager:
+	# each sound type will have its own StreamPlayer
+	# var audio = AudioStreamPlayer.new()
+	# self.add_child(audio)
+	# audio.stream = load("path")
 
 
 func _process(_delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
+
  
 func _physics_process(delta):
 	process_input(delta)
@@ -59,7 +64,7 @@ func process_input(_delta):
 	
 	if Input.is_action_just_pressed("heartbeat"):
 		# avoid queing input signals
-		if $Cooldown.is_stopped():
+		if $SprintStates/Cooldown.is_stopped():
 			emit_signal("input_heartbeat")
 	
 	movement_vec = Vector3()
@@ -94,7 +99,7 @@ func process_UI(_delta):
 
 func abort_sprint():
 	emit_signal("interrupt")
-	$Cooldown.start(5)
+	$SprintStates/Cooldown.start(5)
 
 func _on_Cooldown_timeout():
 	emit_signal("sprint_ready")

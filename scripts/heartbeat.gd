@@ -12,11 +12,11 @@ enum {
 }
 
 onready var state = IDLE
-onready var parent = get_parent()
+onready var root = get_parent().get_parent()
 onready var input_received = false
-onready var SPEED = parent.get_SPEED()
-onready var SPRINT_MOD = parent.get_SPRINT()
-onready var ACCEL = parent.ACCEL
+onready var SPEED = root.get_SPEED()
+onready var SPRINT_MOD = root.get_SPRINT()
+onready var ACCEL = root.ACCEL
 
 const INITIAL_DURATION = 1.2				# heartbeat duration when sprint starts
 onready var DURATION = INITIAL_DURATION		# heartbeat duration that shrinks over time
@@ -29,8 +29,8 @@ func force_fail():
 
 func _ready():
 	set_one_shot(true)
-	parent.connect("interrupt", self, "force_fail")
-	parent.connect("input_heartbeat", self, "beat_heart")
+	root.connect("interrupt", self, "force_fail")
+	root.connect("input_heartbeat", self, "beat_heart")
 
 func _on_Heartbeat_timeout():
 	state = FAIL
@@ -69,7 +69,7 @@ func sprint_state():
 		state = FAIL
 	
 	# PLACEHOLDER changes character speed as he sprints 
-	parent.set_SPEED(interpolate(parent.get_SPEED(), SPEED*SPRINT, 0.05))
+	root.set_SPEED(interpolate(root.get_SPEED(), SPEED*SPRINT, 0.05))
 
 func refresh_state():
 	if input_received:
@@ -79,6 +79,6 @@ func refresh_state():
 		state = SPRINT
 
 func fail_state():
-	parent.set_SPEED(SPEED) # returns them to not-sprinting speed
-	yield(parent, "sprint_ready")
+	root.set_SPEED(SPEED) # returns them to not-sprinting speed
+	yield(root, "sprint_ready")
 	state = IDLE
