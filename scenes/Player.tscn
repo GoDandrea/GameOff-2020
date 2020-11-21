@@ -19,7 +19,7 @@
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 1.wav" type="AudioStream" id=17]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 8.wav" type="AudioStream" id=18]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 7.wav" type="AudioStream" id=19]
-[ext_resource path="res://scripts/audiolibrary.gd" type="Script" id=20]
+[ext_resource path="res://scripts/audio_library.gd" type="Script" id=20]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
