@@ -19,7 +19,7 @@ onready var SPRINT_MOD = root.get_SPRINT()
 onready var ACCEL = root.ACCEL
 
 const INITIAL_DURATION = 1.2				# heartbeat duration when sprint starts
-onready var REFRESH_WINDOW = 0.4 			# time window to refresh the sprint
+onready var REFRESH_WINDOW = 1 			# time window to refresh the sprint
 onready var DURATION = INITIAL_DURATION		# heartbeat duration that shrinks over time
 
 
@@ -59,6 +59,11 @@ func _process(_delta):
 func idle_state():
 	if input_received:
 		input_received = false
+		if !$LowStressCirculation.is_playing(): 
+			$LowStressCirculation.set_volume_db(-80) 
+			$LowStressCirculation.play() 
+		if $LowStressCirculation.get_volume_db() == -80: #Fade in if not already 
+			get_node("Tween").interpolate_property($LowStressCirculation, "volume_db", -80, 0, 1.00, 1, Tween.EASE_IN, 0) #Fade in, except it doesn't fucking do anything!
 		start(INITIAL_DURATION)
 		state = SPRINT
 
@@ -68,6 +73,7 @@ func sprint_state():
 		emit_signal("systole")
 	elif input_received:
 		input_received = false
+		$LowStressCirculation.stop()
 		emit_signal("sprint_fail")
 		state = FAIL
 	
@@ -83,5 +89,6 @@ func refresh_state():
 
 func fail_state():
 	root.set_SPEED(SPEED) # returns them to not-sprinting speed
+	#get_node("Tween").interpolate_property($LowStressCirculation, "volume_db", 0, -80, 1, 1, Tween.EASE_IN, 0)
 	yield(root, "sprint_ready")
 	state = IDLE
