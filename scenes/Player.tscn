@@ -109,55 +109,55 @@ script = ExtResource( 20 )
 script = ExtResource( 20 )
 
 [node name="Low Stress Diastole 1" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 17 )
+stream = ExtResource( 13 )
 
 [node name="Low Stress Diastole 2" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 2 )
+stream = ExtResource( 12 )
 
 [node name="Low Stress Diastole 3" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 5 )
+stream = ExtResource( 9 )
 
 [node name="Low Stress Diastole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 16 )
+stream = ExtResource( 11 )
 
 [node name="Low Stress Diastole 5" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 6 )
+stream = ExtResource( 14 )
 
 [node name="Low Stress Diastole 6" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 10 )
+stream = ExtResource( 15 )
 
 [node name="Low Stress Diastole 7" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 8 )
+stream = ExtResource( 19 )
 
 [node name="Low Stress Diastole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 7 )
+stream = ExtResource( 18 )
 
 [node name="LowSystole" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
 [node name="Low Stress Systole 1" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 13 )
+stream = ExtResource( 17 )
 
 [node name="Low Stress Systole 2" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 12 )
+stream = ExtResource( 2 )
 
 [node name="Low Stress Systole 3" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 9 )
+stream = ExtResource( 5 )
 
 [node name="Low Stress Systole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 11 )
+stream = ExtResource( 16 )
 
 [node name="Low Stress Systole 5" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 14 )
+stream = ExtResource( 6 )
 
 [node name="Low Stress Systole 6" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 15 )
+stream = ExtResource( 10 )
 
 [node name="Low Stress Systole 7" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 19 )
+stream = ExtResource( 8 )
 
 [node name="Low Stress Systole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 18 )
+stream = ExtResource( 7 )
 [connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
 [connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
 [connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]

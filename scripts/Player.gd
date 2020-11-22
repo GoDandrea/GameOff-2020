@@ -13,6 +13,7 @@ var rot_degrees = 0
 var collision
 
 var is_sprinting = false
+var sprint_duration = 0.0
 var stress = 0
 
 # these will be assigned the nodes for each part of the sprint system
@@ -21,9 +22,12 @@ var Breath
 var Balance
 var Blink
 
-signal interrupt		# if a sprint system fails, tells the other systems to force_fail()
-signal sprint_ready		# tells when the sprint cooldowwn is over
-signal input_heartbeat	# tells Heartbeat the player pressed shift
+signal interrupt				# if a sprint system fails, tells the other systems to force_fail()
+signal sprint_ready				# tells when the sprint cooldowwn is over
+signal input_heartbeat			# tells Heartbeat the player pressed shift
+signal breathing_start			# start breathing state maching
+signal input_breath_pressed		# tells Breath space is held down
+signal input_breath_released	# tells Breath space was released
 
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
@@ -40,16 +44,14 @@ func _ready():
 	Blink = get_node("SprintStates/Blink")
 	
 	Heartbeat.connect("sprint_fail", self, "abort_sprint")
+	Breath.connect("sprint_fail", self, "abort_sprint")
+
+
+func _process(delta):
 	
-	# make_audio_players()
-	# audio manager:
-	# each sound type will have its own StreamPlayer
-	# var audio = AudioStreamPlayer.new()
-	# self.add_child(audio)
-	# audio.stream = load("path")
-
-
-func _process(_delta):
+	if is_sprinting:
+		sprint_duration += delta
+	
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
 
@@ -66,6 +68,8 @@ func process_input(_delta):
 		# avoid queing input signals
 		if $SprintStates/Cooldown.is_stopped():
 			emit_signal("input_heartbeat")
+			is_sprinting = true
+	
 	
 	movement_vec = Vector3()
 	rot_degrees = 0
@@ -98,6 +102,7 @@ func process_UI(_delta):
 	pass
 
 func abort_sprint():
+	is_sprinting = false
 	emit_signal("interrupt")
 	$SprintStates/Cooldown.start(5)
 

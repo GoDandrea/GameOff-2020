@@ -19,7 +19,14 @@ onready var SPRINT_MOD = root.get_SPRINT()
 onready var ACCEL = root.ACCEL
 
 const INITIAL_DURATION = 1.2				# heartbeat duration when sprint starts
+onready var REFRESH_WINDOW = 0.4 			# time window to refresh the sprint
 onready var DURATION = INITIAL_DURATION		# heartbeat duration that shrinks over time
+
+
+func _ready():
+	set_one_shot(true)
+	root.connect("interrupt", self, "force_fail")
+	root.connect("input_heartbeat", self, "beat_heart")
 
 func beat_heart():
 	input_received = true
@@ -27,10 +34,6 @@ func beat_heart():
 func force_fail():
 	state = FAIL
 
-func _ready():
-	set_one_shot(true)
-	root.connect("interrupt", self, "force_fail")
-	root.connect("input_heartbeat", self, "beat_heart")
 
 func _on_Heartbeat_timeout():
 	state = FAIL
@@ -42,7 +45,7 @@ func interpolate(valA, valB, ratio):
 
 
 func _process(_delta):
-	print(state)
+	
 	match state:
 		IDLE:
 			idle_state()
@@ -60,7 +63,7 @@ func idle_state():
 		state = SPRINT
 
 func sprint_state():
-	if get_time_left() < 0.4:
+	if get_time_left() < REFRESH_WINDOW:
 		state = REFRESH
 		emit_signal("systole")
 	elif input_received:
