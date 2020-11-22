@@ -18,6 +18,10 @@ onready var SPEED = root.get_SPEED()
 onready var SPRINT_MOD = root.get_SPRINT()
 onready var ACCEL = root.ACCEL
 
+onready var LSCirculationBaseVolume = -20 #Initial volume on starting sprint
+onready var FadeInTime = 0.50 
+onready var FadeOutTime = 2.00
+
 const INITIAL_DURATION = 1.2				# heartbeat duration when sprint starts
 onready var REFRESH_WINDOW = 1 			# time window to refresh the sprint
 onready var DURATION = INITIAL_DURATION		# heartbeat duration that shrinks over time
@@ -37,6 +41,8 @@ func force_fail():
 
 func _on_Heartbeat_timeout():
 	state = FAIL
+	get_node("Tween").interpolate_property($LowStressCirculation, "volume_db", LSCirculationBaseVolume, -80, FadeOutTime, 1, Tween.EASE_IN, 0) #Fade out
+	get_node("Tween").start()
 	emit_signal("sprint_fail")
 
 # placeholder linear interp; used for the placeholder speed setter
@@ -63,7 +69,8 @@ func idle_state():
 			$LowStressCirculation.set_volume_db(-80) 
 			$LowStressCirculation.play() 
 		if $LowStressCirculation.get_volume_db() == -80: #Fade in if not already 
-			get_node("Tween").interpolate_property($LowStressCirculation, "volume_db", -80, 0, 1.00, 1, Tween.EASE_IN, 0) #Fade in, except it doesn't fucking do anything!
+			get_node("Tween").interpolate_property($LowStressCirculation, "volume_db", -80, LSCirculationBaseVolume, FadeInTime, 1, Tween.EASE_IN, 0) #Fade in
+			get_node("Tween").start()
 		start(INITIAL_DURATION)
 		state = SPRINT
 
@@ -89,6 +96,5 @@ func refresh_state():
 
 func fail_state():
 	root.set_SPEED(SPEED) # returns them to not-sprinting speed
-	#get_node("Tween").interpolate_property($LowStressCirculation, "volume_db", 0, -80, 1, 1, Tween.EASE_IN, 0)
 	yield(root, "sprint_ready")
 	state = IDLE
