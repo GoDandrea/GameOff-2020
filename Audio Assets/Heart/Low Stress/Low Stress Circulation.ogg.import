@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Low Stress Circulation.ogg-3433660e61fd9fe9656e50af245e0956.oggstr"
+
+[deps]
+
+source_file="res://Audio Assets/Heart/Low Stress/Low Stress Circulation.ogg"
+dest_files=[ "res://.import/Low Stress Circulation.ogg-3433660e61fd9fe9656e50af245e0956.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

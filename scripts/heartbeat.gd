@@ -18,10 +18,10 @@ onready var SPEED = root.get_SPEED()
 onready var SPRINT_MOD = root.get_SPRINT()
 onready var ACCEL = root.ACCEL
 
-onready var LSCirculationBaseVolume = -20 #Initial volume on starting sprint
+onready var LSCirculationBaseVolume = -30 #Initial volume on starting sprint
 onready var LSCirculationMaxVolume = 0 #Loudest  volume for circulation
 onready var LSCirculationCurrentVolume = LSCirculationBaseVolume
-onready var FadeInTime = 0.50 
+onready var FadeInTime = 4.50 
 onready var FadeOutTime = 5.00
 onready var TweenFade = get_node("Tween")
 
@@ -46,6 +46,7 @@ func _on_Heartbeat_timeout():
 	state = FAIL
 	TweenFade.interpolate_property($LowStressCirculation, "volume_db", LSCirculationCurrentVolume, -80, FadeOutTime, 1, Tween.EASE_IN, 0) #Fade out
 	TweenFade.start()
+	LSCirculationCurrentVolume = LSCirculationBaseVolume #Reset Volume
 	emit_signal("sprint_fail")
 
 # placeholder linear interp; used for the placeholder speed setter

@@ -12,12 +12,12 @@ albedo_color = Color( 0.764706, 0.760784, 0.713726, 1 )
 albedo_texture = ExtResource( 7 )
 roughness_texture = ExtResource( 5 )
 
-[sub_resource type="PanoramaSky" id=3]
+[sub_resource type="PanoramaSky" id=2]
 panorama = ExtResource( 4 )
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=3]
 background_mode = 2
-background_sky = SubResource( 3 )
+background_sky = SubResource( 2 )
 ambient_light_color = Color( 0.913725, 0.905882, 0.807843, 0.596078 )
 
 [node name="Spatial" type="Spatial"]
@@ -54,4 +54,4 @@ script = ExtResource( 3 )
 material = SubResource( 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 3 )

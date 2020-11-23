@@ -1,26 +1,26 @@
 [gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 4.wav" type="AudioStream" id=2]
 [ext_resource path="res://scripts/player.gd" type="Script" id=3]
 [ext_resource path="res://scripts/heartbeat.gd" type="Script" id=4]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 3.wav" type="AudioStream" id=5]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 5.wav" type="AudioStream" id=6]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 8.wav" type="AudioStream" id=7]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 7.wav" type="AudioStream" id=8]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 3.wav" type="AudioStream" id=9]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 6.wav" type="AudioStream" id=10]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 4.wav" type="AudioStream" id=11]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 2.wav" type="AudioStream" id=12]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 1.wav" type="AudioStream" id=13]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 5.wav" type="AudioStream" id=14]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 6.wav" type="AudioStream" id=15]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 4.wav" type="AudioStream" id=16]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 1.wav" type="AudioStream" id=17]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 8.wav" type="AudioStream" id=18]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 7.wav" type="AudioStream" id=19]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 1.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Circulation.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 4.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 8.wav" type="AudioStream" id=10]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 6.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 1.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 5.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 7.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 2.wav" type="AudioStream" id=15]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 3.wav" type="AudioStream" id=16]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 8.wav" type="AudioStream" id=17]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 6.wav" type="AudioStream" id=18]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 5.wav" type="AudioStream" id=19]
 [ext_resource path="res://scripts/audio_library.gd" type="Script" id=20]
-[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Circulation.wav" type="AudioStream" id=21]
+[ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 7.wav" type="AudioStream" id=21]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
@@ -95,7 +95,7 @@ current = true
 script = ExtResource( 4 )
 
 [node name="LowStressCirculation" type="AudioStreamPlayer" parent="SprintStates/Heartbeat"]
-stream = ExtResource( 21 )
+stream = ExtResource( 8 )
 volume_db = -6.023
 
 [node name="Tween" type="Tween" parent="SprintStates/Heartbeat"]
@@ -116,55 +116,55 @@ script = ExtResource( 20 )
 script = ExtResource( 20 )
 
 [node name="Low Stress Diastole 1" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 13 )
+stream = ExtResource( 7 )
 
 [node name="Low Stress Diastole 2" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 12 )
+stream = ExtResource( 6 )
 
 [node name="Low Stress Diastole 3" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 9 )
+stream = ExtResource( 5 )
 
 [node name="Low Stress Diastole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 11 )
+stream = ExtResource( 2 )
 
 [node name="Low Stress Diastole 5" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 14 )
+stream = ExtResource( 13 )
 
 [node name="Low Stress Diastole 6" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 15 )
+stream = ExtResource( 11 )
 
 [node name="Low Stress Diastole 7" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 19 )
+stream = ExtResource( 14 )
 
 [node name="Low Stress Diastole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
-stream = ExtResource( 18 )
+stream = ExtResource( 10 )
 
 [node name="LowSystole" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
 [node name="Low Stress Systole 1" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 17 )
+stream = ExtResource( 12 )
 
 [node name="Low Stress Systole 2" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 2 )
+stream = ExtResource( 15 )
 
 [node name="Low Stress Systole 3" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 5 )
-
-[node name="Low Stress Systole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 16 )
 
+[node name="Low Stress Systole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
+stream = ExtResource( 9 )
+
 [node name="Low Stress Systole 5" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 6 )
+stream = ExtResource( 19 )
 
 [node name="Low Stress Systole 6" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 10 )
+stream = ExtResource( 18 )
 
 [node name="Low Stress Systole 7" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 8 )
+stream = ExtResource( 21 )
 
 [node name="Low Stress Systole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
-stream = ExtResource( 7 )
+stream = ExtResource( 17 )
 [connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
 [connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
 [connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]
