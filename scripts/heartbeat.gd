@@ -23,7 +23,7 @@ onready var FadeInTime = 0.50
 onready var FadeOutTime = 2.00
 
 const INITIAL_DURATION = 1.2				# heartbeat duration when sprint starts
-onready var REFRESH_WINDOW = 1 			# time window to refresh the sprint
+onready var REFRESH_WINDOW = 0.6 			# time window to refresh the sprint
 onready var DURATION = INITIAL_DURATION		# heartbeat duration that shrinks over time
 
 
