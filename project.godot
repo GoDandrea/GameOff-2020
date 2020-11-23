@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MeshInstance",
+"class": "Chunk",
+"language": "GDScript",
+"path": "res://scripts/chunk.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": "VisualShaderNodeUVpixelate",
 "language": "GDScript",
 "path": "res://scripts/pixelate.gd"
 } ]
 _global_script_class_icons={
+"Chunk": "",
 "VisualShaderNodeUVpixelate": ""
 }
 
@@ -23,6 +29,10 @@ _global_script_class_icons={
 config/name="GameOff 2020"
 run/main_scene="res://levels/default.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+globals="*res://scripts/globals.gd"
 
 [input]
 
