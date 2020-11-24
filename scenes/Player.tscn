@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Systole 7.wav" type="AudioStream" id=19]
 [ext_resource path="res://scripts/audio_library.gd" type="Script" id=20]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Circulation.ogg" type="AudioStream" id=21]
+[ext_resource path="res://scripts/breath.gd" type="Script" id=22]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
@@ -101,6 +102,7 @@ volume_db = -6.023
 [node name="Tween" type="Tween" parent="SprintStates/Heartbeat"]
 
 [node name="Breath" type="Timer" parent="SprintStates"]
+script = ExtResource( 22 )
 
 [node name="Balance" type="Node" parent="SprintStates"]
 

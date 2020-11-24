@@ -67,6 +67,11 @@ func _physics_process(delta):
 
 func process_input(_delta):
 	
+	if Input.is_action_just_pressed("breathe"):
+		emit_signal("input_breath_pressed")
+	if Input.is_action_just_released("breathe"):
+		emit_signal("input_breath_released")
+	
 	if Input.is_action_just_pressed("heartbeat"):
 		# avoid queing input signals
 		if $SprintStates/Cooldown.is_stopped():

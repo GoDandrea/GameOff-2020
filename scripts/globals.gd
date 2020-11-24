@@ -4,7 +4,7 @@ var player
 
 # UI variables
 var heartUI
-var lungsUI
+var lungUI
 var brainUI
 var eyeUI
 var portraitUI

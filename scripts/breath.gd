@@ -30,9 +30,11 @@ func force_fail():
 	state = FAIL
 
 func breathing_start():
+	print("inspire")
 	input_pressed = true
 
 func breathing_stop():
+	print("expire")
 	input_pressed = false
 
 func _on_Breath_timeout():
@@ -41,7 +43,11 @@ func _on_Breath_timeout():
 
 
 func _process(delta):
-	time += delta
+	if input_pressed:
+		globals.lungUI.inspire(delta)
+	else:
+		globals.lungUI.expire(delta)
+	
 	match state:
 		IDLE:
 			idle_state()
@@ -56,23 +62,11 @@ func idle_state():
 	pass
 
 func inspire_state():
-	if get_time_left() < 0.4:
-		state = REFRESH
-		emit_signal("systole")
-	elif input_received:
-		input_received = false
-		emit_signal("sprint_fail")
-		state = FAIL
-
+	pass
 
 func expire_state():
-	if input_received:
-		input_received = false
-		emit_signal("diastole")
-		start(DURATION)
-		state = SPRINT
+	pass
 
 func fail_state():
-	root.set_SPEED(SPEED) # returns them to not-sprinting speed
 	yield(root, "sprint_ready")
 	state = IDLE

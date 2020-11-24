@@ -89,7 +89,7 @@ func sprint_state():
 			TweenFade.interpolate_property($LowStressCirculation, "volume_db", LSCirculationCurrentVolume, LSCirculationCurrentVolume +1, FadeInTime, 1, Tween.EASE_IN, 0) 
 			TweenFade.start()
 			LSCirculationCurrentVolume += 1
-			print ($LowStressCirculation.get_volume_db())
+			#print ($LowStressCirculation.get_volume_db())
 	elif input_received:
 		input_received = false
 		emit_signal("sprint_fail")
