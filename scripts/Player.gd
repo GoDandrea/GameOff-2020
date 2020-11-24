@@ -35,6 +35,9 @@ onready var raycast = $RayCast
 onready var cursor = load("res://sprites/crosshair.png")
 
 func _ready():
+	
+	globals.player = self
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	Input.set_custom_mouse_cursor(cursor)
 	
@@ -44,7 +47,7 @@ func _ready():
 	Blink = get_node("SprintStates/Blink")
 	
 	Heartbeat.connect("sprint_fail", self, "abort_sprint")
-	Breath.connect("sprint_fail", self, "abort_sprint")
+	# Breath.connect("sprint_fail", self, "abort_sprint")
 
 
 func _process(delta):

@@ -31,6 +31,8 @@ func _ready():
 	set_one_shot(true)
 	root.connect("interrupt", self, "force_fail")
 	root.connect("input_heartbeat", self, "beat_heart")
+	connect("systole", globals.UIheart, "systole")
+	connect("diastole", globals.UIheart, "diastole")
 
 func beat_heart():
 	input_received = true
@@ -78,6 +80,7 @@ func sprint_state():
 	if get_time_left() < REFRESH_WINDOW:
 		state = REFRESH
 		emit_signal("systole")
+
 	elif input_received:
 		input_received = false
 		$LowStressCirculation.stop()
