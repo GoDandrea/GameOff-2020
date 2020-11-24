@@ -64,11 +64,14 @@ func _ready():
 
 func _process(delta):
 	
-	if sprint_state != WALK or FAIL:
+	if sprint_state != WALK or sprint_state != FAIL:
 		sprint_duration += delta
 	
-	if sprint_duration > 4:
-		pass
+	if sprint_state == HEARTBEAT:
+		if sprint_duration > 5:
+			sprint_state = BREATH
+			emit_signal("breathing_start")
+	
 	
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
@@ -82,9 +85,9 @@ func _physics_process(delta):
 
 func process_input(_delta):
 	
-	if Input.is_action_just_pressed("breathe"):
+	if Input.is_action_pressed("breathe"):
 		emit_signal("input_breath_pressed")
-	if Input.is_action_just_released("breathe"):
+	else:
 		emit_signal("input_breath_released")
 	
 	if Input.is_action_just_pressed("heartbeat"):
@@ -125,12 +128,15 @@ func process_UI(_delta):
 	pass
 
 func abort_sprint():
-	sprint_state = WALK
+	globals.portraitUI.hilight.show()
+	sprint_state = FAIL
 	sprint_duration = 0.0
 	emit_signal("interrupt")
 	$SprintStates/Cooldown.start(5)
 
 func _on_Cooldown_timeout():
+	globals.portraitUI.hilight.hide()
+	sprint_state = WALK
 	emit_signal("sprint_ready")
 
 # SETGET FUNCTIONS #############################################################

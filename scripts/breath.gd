@@ -16,9 +16,6 @@ onready var root = get_parent().get_parent()
 onready var input_pressed = false
 onready var time = 0.0
 
-const INITIAL_DURATION = 1.2				# heartbeat duration when sprint starts
-onready var DURATION = INITIAL_DURATION		# heartbeat duration that shrinks over time
-
 
 func _ready():
 	set_one_shot(true)
@@ -32,41 +29,47 @@ func force_fail():
 func breathing_start():
 	print("inspire")
 	input_pressed = true
+	if state == EXPIRE:
+		state = INSPIRE
 
 func breathing_stop():
 	print("expire")
 	input_pressed = false
+	if state == INSPIRE:
+		state = EXPIRE
 
 func _on_Breath_timeout():
 	state = FAIL
 	emit_signal("sprint_fail")
 
+func _on_Player_breathing_start() -> void:
+	globals.lungUI.progress.show()
+	state = EXPIRE
 
 func _process(delta):
-	if input_pressed:
-		globals.lungUI.inspire(delta)
-	else:
-		globals.lungUI.expire(delta)
 	
 	match state:
 		IDLE:
 			idle_state()
 		INSPIRE:
-			inspire_state()
+			inspire_state(delta)
 		EXPIRE:
-			expire_state()
+			expire_state(delta)
 		FAIL:
 			fail_state()
 
 func idle_state():
 	pass
 
-func inspire_state():
-	pass
+func inspire_state(delta):
+	globals.lungUI.inspire(delta)
 
-func expire_state():
-	pass
+func expire_state(delta):
+	globals.lungUI.expire(delta)
 
 func fail_state():
 	yield(root, "sprint_ready")
 	state = IDLE
+
+
+

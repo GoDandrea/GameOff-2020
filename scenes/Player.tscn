@@ -167,6 +167,7 @@ stream = ExtResource( 8 )
 
 [node name="Low Stress Systole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 7 )
+[connection signal="breathing_start" from="." to="SprintStates/Breath" method="_on_Player_breathing_start"]
 [connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
 [connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
 [connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]
