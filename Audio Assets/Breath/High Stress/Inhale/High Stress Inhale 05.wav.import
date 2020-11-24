@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/High Stress Inhale 05.wav-23e4413846e93e82e316dff1ade23807.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 05.wav"
+dest_files=[ "res://.import/High Stress Inhale 05.wav-23e4413846e93e82e316dff1ade23807.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

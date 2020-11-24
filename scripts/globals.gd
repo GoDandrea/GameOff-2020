@@ -3,11 +3,11 @@ extends Node
 var player
 
 # UI variables
-var UIheart
-var UIlungs
-var UIbrain
-var UIeye
-var UIportrait
+var heartUI
+var lungsUI
+var brainUI
+var eyeUI
+var portraitUI
 
 const QUAD_SIZE = 2
 const CHUNK_QUAD_COUNT = 50

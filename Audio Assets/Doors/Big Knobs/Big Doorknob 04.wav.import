@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Big Doorknob 04.wav-0a820741a0349ab1221eca0875b9ccae.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Doors/Big Knobs/Big Doorknob 04.wav"
+dest_files=[ "res://.import/Big Doorknob 04.wav-0a820741a0349ab1221eca0875b9ccae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

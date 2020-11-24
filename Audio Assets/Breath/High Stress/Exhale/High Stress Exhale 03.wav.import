@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/High Stress Exhale 03.wav-9c83f801fe7de4abd9d25cbc8571afff.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 03.wav"
+dest_files=[ "res://.import/High Stress Exhale 03.wav-9c83f801fe7de4abd9d25cbc8571afff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

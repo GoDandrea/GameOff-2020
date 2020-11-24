@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Door Creaks 07.wav-137027f6ba8d5bcc0fe160d2fadb6ca5.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Doors/Creaks/Door Creaks 07.wav"
+dest_files=[ "res://.import/Door Creaks 07.wav-137027f6ba8d5bcc0fe160d2fadb6ca5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Moon 04.ogg-05208962a69b945f656aaaf97fcd2361.oggstr"
+
+[deps]
+
+source_file="res://Audio Assets/Dialogue/Moon/Moon 04.ogg"
+dest_files=[ "res://.import/Moon 04.ogg-05208962a69b945f656aaaf97fcd2361.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

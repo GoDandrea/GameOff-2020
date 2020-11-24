@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/High Stress Systole 5.wav-9bfea3c5f39969d72b608b2820c4897f.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Heart/High Stress/High Stress Systole 5.wav"
+dest_files=[ "res://.import/High Stress Systole 5.wav-9bfea3c5f39969d72b608b2820c4897f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

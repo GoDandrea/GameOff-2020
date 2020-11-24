@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Max Stress Inhale 02.wav-05516435a2b66563b8b3bcd5e51bd2cf.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Breath/Max Stress/Inhale/Max Stress Inhale 02.wav"
+dest_files=[ "res://.import/Max Stress Inhale 02.wav-05516435a2b66563b8b3bcd5e51bd2cf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
