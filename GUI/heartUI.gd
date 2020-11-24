@@ -1,7 +1,7 @@
 extends MarginContainer
 
 onready var icon = $Background/CenterContainer/Icon
-onready var hilight = $Background/CenterContainer/ColorRect
+onready var hilight = $Background/Hilight
 
 func _ready():
 	hilight.hide()
@@ -9,12 +9,12 @@ func _ready():
 
 func reset():
 	icon.set_scale(Vector2(1,1))
-	#hilight.hide()
+	hilight.hide()
 
 func systole():
 	icon.set_scale(Vector2(1.1, 1.1))
-	#hilight.show()
+	hilight.show()
 
 func diastole():
 	icon.set_scale(Vector2(1,1))
-	#hilight.hide()
+	hilight.hide()

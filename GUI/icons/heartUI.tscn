@@ -7,16 +7,7 @@
 [node name="Heart" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="ColorRect" type="ColorRect" parent="Background/CenterContainer" index="0"]
-margin_right = 128.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 128 )
-rect_clip_content = true
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color( 0.627451, 0, 0, 0.223529 )
-
-[node name="Icon" parent="Background/CenterContainer" index="1"]
+[node name="Icon" parent="Background/CenterContainer" index="0"]
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 64, 64 )

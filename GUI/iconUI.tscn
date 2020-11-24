@@ -18,6 +18,17 @@ margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
 texture = ExtResource( 2 )
 
+[node name="Hilight" type="ColorRect" parent="Background"]
+visible = false
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+rect_clip_content = true
+color = Color( 0.627451, 0, 0, 0.223529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CenterContainer" type="CenterContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
