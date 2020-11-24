@@ -14,7 +14,7 @@ func reset():
 	hilight.hide()
 
 func systole():
-	icon.set_scale(Vector2(1.1, 1.1))
+	icon.set_scale(Vector2(0.9, 0.9))
 	hilight.show()
 
 func diastole():

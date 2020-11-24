@@ -24,7 +24,7 @@ func _ready():
 	generate_chunks_around(player_chunk_grid_pos)
 
 
-func _process(delta):
+func _process(_delta):
 	var old_player_chunk_grid_pos = player_chunk_grid_pos
 	player_chunk_grid_pos  = get_chunk_grid_pos_for(player.translation)
 	if old_player_chunk_grid_pos != player_chunk_grid_pos:
