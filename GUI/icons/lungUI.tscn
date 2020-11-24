@@ -11,4 +11,5 @@ script = ExtResource( 3 )
 value = 99.0
 
 [node name="Icon" parent="Background/CenterContainer" index="0"]
+rect_pivot_offset = Vector2( 64, 16 )
 texture = ExtResource( 1 )

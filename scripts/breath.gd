@@ -15,7 +15,7 @@ onready var state = IDLE
 onready var root = get_parent().get_parent()
 onready var input_pressed = false
 onready var time = 0.0
-
+onready var default_size = 99
 
 func _ready():
 	set_one_shot(true)
@@ -68,6 +68,8 @@ func expire_state(delta):
 	globals.lungUI.expire(delta)
 
 func fail_state():
+	globals.lungUI.progress.hide()
+	globals.lungUI.progress.set_value(default_size)
 	yield(root, "sprint_ready")
 	state = IDLE
 
