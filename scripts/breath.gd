@@ -21,7 +21,7 @@ onready var default_size = 99
 
 onready var InhaleSwitch = 1
 onready var ExhaleSwitch = 0
-
+onready var Started = 0
 
 
 func _ready():
@@ -32,6 +32,7 @@ func _ready():
 
 func force_fail():
 	state = FAIL
+	Started = 0
 
 func breathing_start():
 	#print("inspire")
@@ -39,7 +40,7 @@ func breathing_start():
 	if state == EXPIRE:
 		state = INSPIRE
 		if ExhaleSwitch == 0: ExhaleSwitch = 1
-	if InhaleSwitch == 1:
+	if InhaleSwitch == 1 && Started == 1:
 		emit_signal("InhaleLow")
 		print("Play Inhale")
 		InhaleSwitch = 0
@@ -51,7 +52,7 @@ func breathing_stop():
 		state = EXPIRE
 		if InhaleSwitch == 0: InhaleSwitch = 1
 		
-	if ExhaleSwitch == 1:
+	if ExhaleSwitch == 1 && Started == 1:
 		emit_signal("ExhaleLow")
 		print("Play Exhale")
 		ExhaleSwitch = 0
@@ -64,6 +65,8 @@ func _on_Breath_timeout():
 func _on_Player_breathing_start() -> void:
 	globals.lungUI.progress.show()
 	state = EXPIRE
+	if Started == 0: emit_signal("ExhaleLow")
+	Started = 1
 
 func _process(delta):
 	
@@ -94,6 +97,7 @@ func fail_state():
 	globals.lungUI.progress.set_value(default_size)
 	yield(root, "sprint_ready")
 	state = IDLE
+	Started = 0
 
 
 
