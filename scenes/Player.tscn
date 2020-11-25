@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -45,6 +45,27 @@
 [ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 01.wav" type="AudioStream" id=43]
 [ext_resource path="res://Audio Assets/Breath/Longer Sequences/High Sprint Fail.ogg" type="AudioStream" id=44]
 [ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 07.wav" type="AudioStream" id=45]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 02.wav" type="AudioStream" id=46]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 06.wav" type="AudioStream" id=47]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 07.wav" type="AudioStream" id=48]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 02.wav" type="AudioStream" id=49]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 04.wav" type="AudioStream" id=50]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 01.wav" type="AudioStream" id=51]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 05.wav" type="AudioStream" id=52]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 07.wav" type="AudioStream" id=53]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 01.wav" type="AudioStream" id=54]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 07.wav" type="AudioStream" id=55]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 03.wav" type="AudioStream" id=56]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 03.wav" type="AudioStream" id=57]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 04.wav" type="AudioStream" id=58]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 06.wav" type="AudioStream" id=59]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 05.wav" type="AudioStream" id=60]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 03.wav" type="AudioStream" id=61]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 06.wav" type="AudioStream" id=62]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 04.wav" type="AudioStream" id=63]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 02.wav" type="AudioStream" id=64]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 05.wav" type="AudioStream" id=65]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 01.wav" type="AudioStream" id=66]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
@@ -128,9 +149,12 @@ volume_db = -6.023
 script = ExtResource( 22 )
 
 [node name="LowFail" type="AudioStreamPlayer" parent="SprintStates/Breath"]
+bus = "MoonBreath"
 
 [node name="HighFail" type="AudioStreamPlayer" parent="SprintStates/Breath"]
 stream = ExtResource( 44 )
+volume_db = 4.564
+bus = "MoonBreath"
 
 [node name="Balance" type="Node" parent="SprintStates"]
 
@@ -217,105 +241,200 @@ script = ExtResource( 20 )
 
 [node name="Low Stress Inhale 1" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
 stream = ExtResource( 27 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="Low Stress Inhale 2" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
 stream = ExtResource( 32 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="Low Stress Inhale 3" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
 stream = ExtResource( 29 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="Low Stress Inhale 4" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
 stream = ExtResource( 30 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="LowExhale" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
 [node name="Low Stress Exhale 1" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
 stream = ExtResource( 23 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="Low Stress Exhale 2" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
 stream = ExtResource( 28 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="Low Stress Exhale 3" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
 stream = ExtResource( 24 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="Low Stress Exhale 4" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
 stream = ExtResource( 31 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="HighInhale" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
 [node name="High Stress Inhale 1" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 33 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Inhale 2" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 25 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Inhale 3" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 26 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Inhale 4" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 39 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Inhale 5" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 34 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Inhale 6" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 38 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Inhale 7" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
 stream = ExtResource( 35 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="HighExhale" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
 [node name="High Stress Exhale 1" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 43 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Exhale 2" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 40 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Exhale 3" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 42 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Exhale 4" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 41 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Exhale 5" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 37 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Exhale 6" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 36 )
-bus = "Breath"
+bus = "MoonBreath"
 
 [node name="High Stress Exhale 7" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
 stream = ExtResource( 45 )
-bus = "Breath"
+bus = "MoonBreath"
+
+[node name="MoonHighFootstep" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="MoonHighStep 1" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 54 )
+bus = "MoonSteps"
+
+[node name="MoonHighStep 2" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 49 )
+bus = "MoonSteps"
+
+[node name="MoonHighStep 3" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 57 )
+bus = "MoonSteps"
+
+[node name="MoonHighStep 4" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 50 )
+bus = "MoonSteps"
+
+[node name="MoonHighStep 5" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 52 )
+bus = "MoonSteps"
+
+[node name="MoonHighStep 6" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 47 )
+bus = "MoonSteps"
+
+[node name="MoonHighStep 7" type="AudioStreamPlayer" parent="AudioLibrary/MoonHighFootstep"]
+stream = ExtResource( 53 )
+bus = "MoonSteps"
+
+[node name="MoonLowFootstep" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="MoonLowStep 1" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 51 )
+bus = "MoonSteps"
+
+[node name="MoonLowStep 2" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 46 )
+bus = "MoonSteps"
+
+[node name="MoonLowStep 3" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 56 )
+bus = "MoonSteps"
+
+[node name="MoonLowStep 4" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 58 )
+bus = "MoonSteps"
+
+[node name="MoonLowStep 5" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 60 )
+bus = "MoonSteps"
+
+[node name="MoonLowStep 6" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 59 )
+bus = "MoonSteps"
+
+[node name="MoonLowStep 7" type="AudioStreamPlayer" parent="AudioLibrary/MoonLowFootstep"]
+stream = ExtResource( 48 )
+bus = "MoonSteps"
+
+[node name="MoonWalkFootstep" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="MoonWalkStep 1" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 66 )
+bus = "MoonSteps"
+
+[node name="MoonWalkStep 2" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 64 )
+bus = "MoonSteps"
+
+[node name="MoonWalkStep 3" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 61 )
+bus = "MoonSteps"
+
+[node name="MoonWalkStep 4" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 63 )
+bus = "MoonSteps"
+
+[node name="MoonWalkStep 5" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 65 )
+bus = "MoonSteps"
+
+[node name="MoonWalkStep 6" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 62 )
+bus = "MoonSteps"
+
+[node name="MoonWalkStep 7" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
+stream = ExtResource( 55 )
+bus = "MoonSteps"
 [connection signal="breathing_start" from="." to="SprintStates/Breath" method="_on_Player_breathing_start"]
 [connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
 [connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
 [connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]
+[connection signal="ExhaleHigh" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "HighExhale" ]]
 [connection signal="ExhaleLow" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "LowExhale" ]]
+[connection signal="InhaleHigh" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "HighInhale" ]]
 [connection signal="InhaleLow" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "LowInhale" ]]
 [connection signal="timeout" from="SprintStates/Breath" to="SprintStates/Breath" method="_on_Breath_timeout"]
 [connection signal="timeout" from="SprintStates/Cooldown" to="." method="_on_Cooldown_timeout"]

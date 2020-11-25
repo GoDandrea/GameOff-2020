@@ -15,6 +15,9 @@ var collision
 var sprint_duration = 0.0
 var stress = 0
 var sprint_state
+
+var TimeToHighState = 10
+
 enum {
 	WALK,
 	HEARTBEAT,
@@ -153,3 +156,7 @@ func set_SPRINT(value):
 
 func get_SPRINT():
 	return SPRINT_MOD
+
+
+func play(extra_arg_0):
+	pass # Replace with function body.
