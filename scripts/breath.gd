@@ -3,6 +3,8 @@ extends Timer
 signal sprint_fail	# sprinting is to be interrupted in a failed state
 signal inspire		# player holding space; time counting up
 signal expire		# player released space; time counting down
+signal ExhaleLow
+signal InhaleLow
 
 enum {
 	IDLE,
@@ -16,6 +18,11 @@ onready var root = get_parent().get_parent()
 onready var input_pressed = false
 onready var time = 0.0
 onready var default_size = 99
+
+onready var InhaleSwitch = 1
+onready var ExhaleSwitch = 0
+
+
 
 func _ready():
 	set_one_shot(true)
@@ -31,12 +38,19 @@ func breathing_start():
 	input_pressed = true
 	if state == EXPIRE:
 		state = INSPIRE
+	if InhaleSwitch == 1:
+		emit_signal("InhaleLow")
+		InhaleSwitch = 0
 
 func breathing_stop():
 	print("expire")
 	input_pressed = false
 	if state == INSPIRE:
 		state = EXPIRE
+	if ExhaleSwitch == 1:
+		emit_signal("ExhaleLow")
+		ExhaleSwitch = 0
+		
 
 func _on_Breath_timeout():
 	state = FAIL
@@ -63,9 +77,13 @@ func idle_state():
 
 func inspire_state(delta):
 	globals.lungUI.inspire(delta)
+	if ExhaleSwitch == 0: ExhaleSwitch = 1
+
 
 func expire_state(delta):
 	globals.lungUI.expire(delta)
+	if InhaleSwitch == 0: InhaleSwitch = 1
+
 
 func fail_state():
 	globals.lungUI.progress.hide()

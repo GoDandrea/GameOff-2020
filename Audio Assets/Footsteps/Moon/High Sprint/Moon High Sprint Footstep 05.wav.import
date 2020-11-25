@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Moon High Sprint Footstep 05.wav-53d2801dbcb0080ea976a10ad32db4cb.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Footsteps/Moon/High Sprint/Moon High Sprint Footstep 05.wav"
+dest_files=[ "res://.import/Moon High Sprint Footstep 05.wav-53d2801dbcb0080ea976a10ad32db4cb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

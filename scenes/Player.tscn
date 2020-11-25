@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -22,6 +22,29 @@
 [ext_resource path="res://scripts/audio_library.gd" type="Script" id=20]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Circulation.ogg" type="AudioStream" id=21]
 [ext_resource path="res://scripts/breath.gd" type="Script" id=22]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Exhale/Low Stress Exhale 01.wav" type="AudioStream" id=23]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Exhale/Low Stress Exhale 03.wav" type="AudioStream" id=24]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 02.wav" type="AudioStream" id=25]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 03.wav" type="AudioStream" id=26]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Inhale/Low Stress Inhale 01.wav" type="AudioStream" id=27]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Exhale/Low Stress Exhale 02.wav" type="AudioStream" id=28]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Inhale/Low Stress Inhale 03.wav" type="AudioStream" id=29]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Inhale/Low Stress Inhale 04.wav" type="AudioStream" id=30]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Exhale/Low Stress Exhale 04.wav" type="AudioStream" id=31]
+[ext_resource path="res://Audio Assets/Breath/Low Stress/Inhale/Low Stress Inhale 02.wav" type="AudioStream" id=32]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 01.wav" type="AudioStream" id=33]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 05.wav" type="AudioStream" id=34]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 07.wav" type="AudioStream" id=35]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 06.wav" type="AudioStream" id=36]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 05.wav" type="AudioStream" id=37]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 06.wav" type="AudioStream" id=38]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Inhale/High Stress Inhale 04.wav" type="AudioStream" id=39]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 02.wav" type="AudioStream" id=40]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 04.wav" type="AudioStream" id=41]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 03.wav" type="AudioStream" id=42]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 01.wav" type="AudioStream" id=43]
+[ext_resource path="res://Audio Assets/Breath/Longer Sequences/High Sprint Fail.ogg" type="AudioStream" id=44]
+[ext_resource path="res://Audio Assets/Breath/High Stress/Exhale/High Stress Exhale 07.wav" type="AudioStream" id=45]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
@@ -104,6 +127,11 @@ volume_db = -6.023
 [node name="Breath" type="Timer" parent="SprintStates"]
 script = ExtResource( 22 )
 
+[node name="LowFail" type="AudioStreamPlayer" parent="SprintStates/Breath"]
+
+[node name="HighFail" type="AudioStreamPlayer" parent="SprintStates/Breath"]
+stream = ExtResource( 44 )
+
 [node name="Balance" type="Node" parent="SprintStates"]
 
 [node name="Blink" type="Node" parent="SprintStates"]
@@ -119,57 +147,175 @@ script = ExtResource( 20 )
 
 [node name="Low Stress Diastole 1" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 13 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 2" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 12 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 3" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 9 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 11 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 5" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 14 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 6" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 15 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 7" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 19 )
+bus = "Heartbeat"
 
 [node name="Low Stress Diastole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowDiastole"]
 stream = ExtResource( 18 )
+bus = "Heartbeat"
 
 [node name="LowSystole" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
 [node name="Low Stress Systole 1" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 17 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 2" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 2 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 3" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 5 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 4" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 16 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 5" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 6 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 6" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 10 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 7" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 8 )
+bus = "Heartbeat"
 
 [node name="Low Stress Systole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 7 )
+bus = "Heartbeat"
+
+[node name="LowInhale" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="Low Stress Inhale 1" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
+stream = ExtResource( 27 )
+bus = "Breath"
+
+[node name="Low Stress Inhale 2" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
+stream = ExtResource( 32 )
+bus = "Breath"
+
+[node name="Low Stress Inhale 3" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
+stream = ExtResource( 29 )
+bus = "Breath"
+
+[node name="Low Stress Inhale 4" type="AudioStreamPlayer" parent="AudioLibrary/LowInhale"]
+stream = ExtResource( 30 )
+bus = "Breath"
+
+[node name="LowExhale" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="Low Stress Exhale 1" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
+stream = ExtResource( 23 )
+bus = "Breath"
+
+[node name="Low Stress Exhale 2" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
+stream = ExtResource( 28 )
+bus = "Breath"
+
+[node name="Low Stress Exhale 3" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
+stream = ExtResource( 24 )
+bus = "Breath"
+
+[node name="Low Stress Exhale 4" type="AudioStreamPlayer" parent="AudioLibrary/LowExhale"]
+stream = ExtResource( 31 )
+bus = "Breath"
+
+[node name="HighInhale" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="High Stress Inhale 1" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 33 )
+bus = "Breath"
+
+[node name="High Stress Inhale 2" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 25 )
+bus = "Breath"
+
+[node name="High Stress Inhale 3" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 26 )
+bus = "Breath"
+
+[node name="High Stress Inhale 4" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 39 )
+bus = "Breath"
+
+[node name="High Stress Inhale 5" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 34 )
+bus = "Breath"
+
+[node name="High Stress Inhale 6" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 38 )
+bus = "Breath"
+
+[node name="High Stress Inhale 7" type="AudioStreamPlayer" parent="AudioLibrary/HighInhale"]
+stream = ExtResource( 35 )
+bus = "Breath"
+
+[node name="HighExhale" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="High Stress Exhale 1" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 43 )
+bus = "Breath"
+
+[node name="High Stress Exhale 2" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 40 )
+bus = "Breath"
+
+[node name="High Stress Exhale 3" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 42 )
+bus = "Breath"
+
+[node name="High Stress Exhale 4" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 41 )
+bus = "Breath"
+
+[node name="High Stress Exhale 5" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 37 )
+bus = "Breath"
+
+[node name="High Stress Exhale 6" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 36 )
+bus = "Breath"
+
+[node name="High Stress Exhale 7" type="AudioStreamPlayer" parent="AudioLibrary/HighExhale"]
+stream = ExtResource( 45 )
+bus = "Breath"
 [connection signal="breathing_start" from="." to="SprintStates/Breath" method="_on_Player_breathing_start"]
 [connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
 [connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
 [connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]
+[connection signal="ExhaleLow" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "LowExhale" ]]
+[connection signal="InhaleLow" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "LowInhale" ]]
 [connection signal="timeout" from="SprintStates/Breath" to="SprintStates/Breath" method="_on_Breath_timeout"]
 [connection signal="timeout" from="SprintStates/Cooldown" to="." method="_on_Cooldown_timeout"]

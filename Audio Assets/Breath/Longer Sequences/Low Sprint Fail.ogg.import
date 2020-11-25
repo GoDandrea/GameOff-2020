@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Low Sprint Fail.ogg-fcbebc255251e95c57deb5d7b0849ef9.oggstr"
+
+[deps]
+
+source_file="res://Audio Assets/Breath/Longer Sequences/Low Sprint Fail.ogg"
+dest_files=[ "res://.import/Low Sprint Fail.ogg-fcbebc255251e95c57deb5d7b0849ef9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

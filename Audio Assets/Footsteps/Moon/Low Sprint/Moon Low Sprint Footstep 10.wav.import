@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Moon Low Sprint Footstep 10.wav-bb986c99861f6b8db6f54f7ee6cfbfb8.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Footsteps/Moon/Low Sprint/Moon Low Sprint Footstep 10.wav"
+dest_files=[ "res://.import/Moon Low Sprint Footstep 10.wav-bb986c99861f6b8db6f54f7ee6cfbfb8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
