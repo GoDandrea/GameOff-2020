@@ -34,21 +34,26 @@ func force_fail():
 	state = FAIL
 
 func breathing_start():
-	print("inspire")
+	#print("inspire")
 	input_pressed = true
 	if state == EXPIRE:
 		state = INSPIRE
+		if ExhaleSwitch == 0: ExhaleSwitch = 1
 	if InhaleSwitch == 1:
 		emit_signal("InhaleLow")
+		print("Play Inhale")
 		InhaleSwitch = 0
 
 func breathing_stop():
-	print("expire")
+	#print("expire")
 	input_pressed = false
 	if state == INSPIRE:
 		state = EXPIRE
+		if InhaleSwitch == 0: InhaleSwitch = 1
+		
 	if ExhaleSwitch == 1:
 		emit_signal("ExhaleLow")
+		print("Play Exhale")
 		ExhaleSwitch = 0
 		
 
@@ -77,12 +82,11 @@ func idle_state():
 
 func inspire_state(delta):
 	globals.lungUI.inspire(delta)
-	if ExhaleSwitch == 0: ExhaleSwitch = 1
+
 
 
 func expire_state(delta):
 	globals.lungUI.expire(delta)
-	if InhaleSwitch == 0: InhaleSwitch = 1
 
 
 func fail_state():
