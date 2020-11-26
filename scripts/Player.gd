@@ -67,7 +67,7 @@ func _ready():
 
 func _process(delta):
 	
-	if sprint_state != WALK or sprint_state != FAIL:
+	if sprint_state != WALK and sprint_state != FAIL:
 		sprint_duration += delta
 	
 	if sprint_state == HEARTBEAT:
@@ -94,6 +94,7 @@ func process_input(_delta):
 		emit_signal("input_breath_released")
 	
 	if Input.is_action_just_pressed("heartbeat"):
+		print(sprint_duration)
 		# avoid queing input signals
 		if $SprintStates/Cooldown.is_stopped():
 			emit_signal("input_heartbeat")
@@ -131,9 +132,9 @@ func process_UI(_delta):
 	pass
 
 func abort_sprint():
+	sprint_duration = 0.0
 	globals.portraitUI.hilight.show()
 	sprint_state = FAIL
-	sprint_duration = 0.0
 	emit_signal("interrupt")
 	$SprintStates/Cooldown.start(5)
 

@@ -28,9 +28,6 @@ onready var Started = 0
 onready var Verb = AudioServer.get_bus_effect(AudioServer.get_bus_index("MoonBreath"), 0)
 
 
-
-
-
 func _ready():
 	set_one_shot(true)
 	root.connect("interrupt", self, "force_fail")
@@ -42,10 +39,6 @@ func _ready():
 #	Verb.predelay_msec = 1
 #	Verb.damping = 1
 
-	
-	
-	
-	
 
 func force_fail():
 	state = FAIL
@@ -58,10 +51,11 @@ func breathing_start():
 	if state == EXPIRE:
 		state = INSPIRE
 		if ExhaleSwitch == 0: ExhaleSwitch = 1
+
 	if InhaleSwitch == 1 && Started == 1:
 		if root.sprint_duration > root.TimeToHighState: emit_signal("InhaleHigh")
 		else: emit_signal("InhaleLow")
-		print("Play Inhale")
+		# print("Play Inhale")
 		InhaleSwitch = 0
 
 func breathing_stop():
@@ -70,6 +64,7 @@ func breathing_stop():
 	if state == INSPIRE:
 		state = EXPIRE
 		if InhaleSwitch == 0: InhaleSwitch = 1
+
 	if ExhaleSwitch == 1 && Started == 1:
 		if root.sprint_duration > root.TimeToHighState:	emit_signal("ExhaleHigh")
 		else: emit_signal("ExhaleLow")
@@ -87,7 +82,7 @@ func _on_Breath_timeout():
 		#$LowFail.play()
 	#else: $LowFail.play()
 
-func _on_Player_breathing_start() -> void:
+func _on_Player_breathing_start():
 	globals.lungUI.progress.show()
 	state = EXPIRE
 	if Started == 0: emit_signal("ExhaleLow")
@@ -118,8 +113,8 @@ func expire_state(delta):
 
 
 func fail_state():
-	globals.lungUI.progress.hide()
 	globals.lungUI.progress.set_value(default_size)
+	globals.lungUI.progress.hide()
 	yield(root, "sprint_ready")
 	state = IDLE
 	Started = 0
