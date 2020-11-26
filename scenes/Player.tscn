@@ -130,7 +130,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "high_sprint"
-length = 1.4
+length = 0.7
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera:translation")
@@ -139,19 +139,19 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1, 1.2, 1.4 ),
+"times": PoolRealArray( 0, 0.15, 0.25, 0.35, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( -0.03, 0.08, 0 ), Vector3( -0.05, -0.02, 0 ), Vector3( 0, 0, 0 ), Vector3( 0.03, 0.08, 0 ), Vector3( 0.05, -0.02, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("AudioLibrary/MoonWalkFootstep")
+tracks/1/path = NodePath("AudioLibrary/MoonHighFootstep")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.48, 1.18 ),
+"times": PoolRealArray( 0.24, 0.59 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ null ],
