@@ -37,7 +37,7 @@ func tilt_camera():
 	camera.set_rotation_degrees(Vector3(0, 0, tilt))
 
 
-func _process():
+func _process(_delta):
 	
 	if tilt > 22 or tilt < -22:
 		force_fail()
