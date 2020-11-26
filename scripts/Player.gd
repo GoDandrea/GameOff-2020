@@ -138,6 +138,12 @@ func process_movement(delta):
 		else:
 			animator.stop(true)
 	
+	if sprint_state == HEARTBEAT:
+		if movement_vec != Vector3(0, 0, 0):
+			animator.play("low_sprint")
+		else:
+			animator.stop(true)
+	
 	# this collision data can be used to make better collision failures eventually
 	if is_down == false:
 		collision = move_and_collide(movement_vec * SPEED * delta)
