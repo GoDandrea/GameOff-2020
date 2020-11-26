@@ -85,6 +85,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.0660384, 0 ), Vector3( 0, 0, 0 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("AudioLibrary/MoonWalkFootstep")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ null ],
+"method": "play"
+} ]
+}
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
