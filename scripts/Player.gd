@@ -42,11 +42,12 @@ signal input_breath_pressed		# tells Breath space is held down
 signal input_breath_released	# tells Breath space was released
 signal balance_start			# start balance state machine
 
-onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
-onready var walk_anim = $AnimationPlayer
+onready var animator = $AnimationPlayer
  
 onready var cursor = load("res://sprites/crosshair.png")
+
+onready var has_stumbled = false
 
 func _ready():
 	
@@ -130,11 +131,12 @@ func process_movement(delta):
 		movement_vec = movement_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		rotation_degrees.y += rot_degrees
 
-	if movement_vec != Vector3(0, 0, 0):
-		walk_anim.play("walk")
-	elif walk_anim.is_playing():
-		walk_anim.stop(true)
-
+	if sprint_state == WALK or (sprint_state == FAIL and has_stumbled):
+		if movement_vec != Vector3(0, 0, 0):
+			animator.play("walk")
+		else:
+			animator.stop(true)
+	
 	# this collision data can be used to make better collision failures eventually
 	collision = move_and_collide(movement_vec * SPEED * delta)
 	if collision and SPEED > 2.5:
@@ -143,16 +145,22 @@ func process_movement(delta):
 func process_UI(_delta):
 	pass
 
+func do_stumble():
+	has_stumbled = true
+
 func abort_sprint():
-	sprint_duration = 0.0
-	globals.portraitUI.hilight.show()
 	sprint_state = FAIL
+	globals.portraitUI.hilight.show()
 	emit_signal("interrupt")
 	$SprintStates/Cooldown.start(5)
+	if sprint_duration < 9  and has_stumbled == false:
+		animator.play("stumble")
+	sprint_duration = 0.0
 
 func _on_Cooldown_timeout():
 	globals.portraitUI.hilight.hide()
 	sprint_state = WALK
+	has_stumbled = false
 	emit_signal("sprint_ready")
 
 # SETGET FUNCTIONS #############################################################
