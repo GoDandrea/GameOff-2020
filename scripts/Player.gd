@@ -40,8 +40,7 @@ signal input_heartbeat			# tells Heartbeat the player pressed shift
 signal breathing_start			# start breathing state machine
 signal input_breath_pressed		# tells Breath space is held down
 signal input_breath_released	# tells Breath space was released
-
-
+signal balance_start			# start balance state machine
 
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
@@ -65,6 +64,7 @@ func _ready():
 	
 	Heartbeat.connect("sprint_fail", self, "abort_sprint")
 	Breath.connect("sprint_fail", self, "abort_sprint")
+	Balance.connect("sprint_fail", self, "abort_sprint")
 
 
 func _process(delta):
@@ -76,6 +76,11 @@ func _process(delta):
 		if sprint_duration > 5:
 			sprint_state = BREATH
 			emit_signal("breathing_start")
+	
+	if sprint_state == BREATH:
+		if sprint_duration > 9:
+			sprint_state = BALANCE
+			emit_signal("balance_start")
 	
 	
 	if Input.is_action_pressed("exit"):

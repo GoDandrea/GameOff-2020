@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -66,6 +66,7 @@
 [ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 02.wav" type="AudioStream" id=64]
 [ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 05.wav" type="AudioStream" id=65]
 [ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 01.wav" type="AudioStream" id=66]
+[ext_resource path="res://scripts/balance.gd" type="Script" id=67]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
@@ -174,6 +175,7 @@ volume_db = 4.564
 bus = "MoonBreath"
 
 [node name="Balance" type="Node" parent="SprintStates"]
+script = ExtResource( 67 )
 
 [node name="Blink" type="Node" parent="SprintStates"]
 
@@ -445,6 +447,7 @@ bus = "MoonSteps"
 [node name="MoonWalkStep 7" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
 stream = ExtResource( 55 )
 bus = "MoonSteps"
+[connection signal="balance_start" from="." to="SprintStates/Balance" method="_on_Player_balance_start"]
 [connection signal="breathing_start" from="." to="SprintStates/Breath" method="_on_Player_breathing_start"]
 [connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
 [connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
