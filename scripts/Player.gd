@@ -10,6 +10,7 @@ var ROT_SENS = 1.2
 
 var movement_vec = Vector3()
 var rot_degrees = 0
+var is_moving = false
 var collision
 
 var sprint_duration = 0.0
@@ -44,6 +45,7 @@ signal input_breath_released	# tells Breath space was released
 
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
+onready var walk_anim = $AnimationPlayer
  
 onready var cursor = load("res://sprites/crosshair.png")
 
@@ -123,7 +125,12 @@ func process_movement(delta):
 		movement_vec = movement_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		rotation_degrees.y += rot_degrees
 
-	# this collision data can be used to make better collision failures eventurally
+	if movement_vec != Vector3(0, 0, 0):
+		walk_anim.play("walk")
+	elif walk_anim.is_playing():
+		walk_anim.stop(true)
+
+	# this collision data can be used to make better collision failures eventually
 	collision = move_and_collide(movement_vec * SPEED * delta)
 	if collision and SPEED > 2.5:
 		abort_sprint()

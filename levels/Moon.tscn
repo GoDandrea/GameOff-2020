@@ -45,12 +45,12 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Player" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.89269, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6054, 0 )
 
 [node name="GUI" parent="." instance=ExtResource( 1 )]
 
 [node name="TerrainGenerator" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 3 )
 material = SubResource( 1 )
 
