@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -70,6 +70,63 @@
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
+
+[sub_resource type="Animation" id=4]
+resource_name = "fall_down"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.7, 1, 2, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.204, 0.15, 0 ), Vector3( -0.409, -0.2, 0 ), Vector3( 0.4, -0.6, -0.007 ), Vector3( 0.234779, -0.225068, -1.01476 ), Vector3( 0.234779, -0.225068, -1.01476 ), Vector3( 0.0299686, 0.507995, -0.729736 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.7, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -10 ), Vector3( 0, 0, 15 ), Vector3( 0, 0, -10 ), Vector3( -6.04207, 9.30603, -6.63088 ), Vector3( -6.04207, 9.30603, -6.63088 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.7, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 20, 0, 0 ), Vector3( 0, 20, 0 ), Vector3( -25, -10, 0 ), Vector3( -16.3514, -2.39283, 0.44191 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2.9, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "stand_up"
+}, {
+"args": [  ],
+"method": "do_stumble"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "stumble"
@@ -163,7 +220,7 @@ tracks/1/keys = {
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -1.49012e-07, -1, 0, 1, -1.78814e-07, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="RayCast" type="RayCast" parent="."]
@@ -171,6 +228,7 @@ enabled = true
 cast_to = Vector3( 0, 0, -2000 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fall_down = SubResource( 4 )
 anims/stumble = SubResource( 3 )
 anims/walk = SubResource( 2 )
 
@@ -205,6 +263,7 @@ __meta__ = {
 }
 
 [node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 current = true
 
 [node name="SprintStates" type="Node" parent="."]

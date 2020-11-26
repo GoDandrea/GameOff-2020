@@ -1,8 +1,8 @@
 extends Timer
 
 signal sprint_fail	# sprinting is to be interrupted in a failed state
-signal inspire		# player holding space; time counting up
-signal expire		# player released space; time counting down
+#signal inspire		# player holding space; time counting up
+#signal expire		# player released space; time counting down
 signal ExhaleLow
 signal InhaleLow
 signal ExhaleHigh

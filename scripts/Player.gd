@@ -47,7 +47,9 @@ onready var animator = $AnimationPlayer
  
 onready var cursor = load("res://sprites/crosshair.png")
 
+onready var sprint_aborted = false
 onready var has_stumbled = false
+onready var is_down = false
 
 func _ready():
 	
@@ -102,7 +104,6 @@ func process_input(_delta):
 		emit_signal("input_breath_released")
 	
 	if Input.is_action_just_pressed("heartbeat"):
-		print(sprint_duration)
 		# avoid queing input signals
 		if $SprintStates/Cooldown.is_stopped():
 			emit_signal("input_heartbeat")
@@ -138,7 +139,8 @@ func process_movement(delta):
 			animator.stop(true)
 	
 	# this collision data can be used to make better collision failures eventually
-	collision = move_and_collide(movement_vec * SPEED * delta)
+	if is_down == false:
+		collision = move_and_collide(movement_vec * SPEED * delta)
 	if collision and SPEED > 2.5:
 		abort_sprint()
 
@@ -148,17 +150,26 @@ func process_UI(_delta):
 func do_stumble():
 	has_stumbled = true
 
+func stand_up():
+	is_down = false
+
 func abort_sprint():
-	sprint_state = FAIL
-	globals.portraitUI.hilight.show()
-	emit_signal("interrupt")
-	$SprintStates/Cooldown.start(5)
-	if sprint_duration < 9  and has_stumbled == false:
-		animator.play("stumble")
-	sprint_duration = 0.0
+	if sprint_aborted  == false:
+		sprint_aborted = true
+		sprint_state = FAIL
+		globals.portraitUI.hilight.show()
+		emit_signal("interrupt")
+		$SprintStates/Cooldown.start(5)
+		if sprint_duration < 9  and has_stumbled == false:
+			animator.play("stumble")
+		elif has_stumbled == false:
+			is_down = true
+			animator.play("fall_down")
+		sprint_duration = 0.0
 
 func _on_Cooldown_timeout():
 	globals.portraitUI.hilight.hide()
+	sprint_aborted = false
 	sprint_state = WALK
 	has_stumbled = false
 	emit_signal("sprint_ready")
@@ -179,5 +190,5 @@ func get_SPRINT():
 	return SPRINT_MOD
 
 
-func play(extra_arg_0):
+func play(_extra_arg_0):
 	pass # Replace with function body.
