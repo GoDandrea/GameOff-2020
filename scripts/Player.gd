@@ -98,6 +98,11 @@ func _physics_process(delta):
 
 func process_input(_delta):
 	
+	if Input.is_action_just_pressed("left_click"):
+		globals.eyeUI.close_eye()
+	if Input.is_action_just_released("left_click"):
+		globals.eyeUI.open_eye()
+	
 	if Input.is_action_pressed("breathe"):
 		emit_signal("input_breath_pressed")
 	else:
@@ -108,8 +113,7 @@ func process_input(_delta):
 		if $SprintStates/Cooldown.is_stopped():
 			emit_signal("input_heartbeat")
 			sprint_state = HEARTBEAT
-	
-	
+		
 	movement_vec = Vector3()
 	rot_degrees = 0
 	if Input.is_action_pressed("move_forward"):
@@ -121,6 +125,7 @@ func process_input(_delta):
 	if Input.is_action_pressed("move_right"):
 		rot_degrees -= ROT_SENS
 	
+
 
 func process_movement(delta):
 	

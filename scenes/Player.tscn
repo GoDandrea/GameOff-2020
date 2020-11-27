@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -67,11 +67,12 @@
 [ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 05.wav" type="AudioStream" id=65]
 [ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 01.wav" type="AudioStream" id=66]
 [ext_resource path="res://scripts/balance.gd" type="Script" id=67]
+[ext_resource path="res://scripts/blink.gd" type="Script" id=68]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "fall_down"
 length = 3.0
 tracks/0/type = "value"
@@ -128,7 +129,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "high_sprint"
 length = 0.7
 step = 0.01
@@ -162,7 +163,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "low_sprint"
 step = 0.01
 tracks/0/type = "value"
@@ -195,8 +196,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "stumble"
+[sub_resource type="Animation" id=5]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera:translation")
@@ -249,8 +249,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk"
+[sub_resource type="Animation" id=6]
 length = 1.4
 step = 0.01
 tracks/0/type = "value"
@@ -295,11 +294,11 @@ enabled = true
 cast_to = Vector3( 0, 0, -2000 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fall_down = SubResource( 4 )
-anims/high_sprint = SubResource( 6 )
-anims/low_sprint = SubResource( 5 )
-anims/stumble = SubResource( 3 )
-anims/walk = SubResource( 2 )
+anims/fall_down = SubResource( 2 )
+anims/high_sprint = SubResource( 3 )
+anims/low_sprint = SubResource( 4 )
+anims/stumble = SubResource( 5 )
+anims/walk = SubResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -332,7 +331,6 @@ __meta__ = {
 }
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 current = true
 
 [node name="SprintStates" type="Node" parent="."]
@@ -361,6 +359,7 @@ bus = "MoonBreath"
 script = ExtResource( 67 )
 
 [node name="Blink" type="Node" parent="SprintStates"]
+script = ExtResource( 68 )
 
 [node name="Cooldown" type="Timer" parent="SprintStates"]
 one_shot = true
