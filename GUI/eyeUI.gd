@@ -1,5 +1,8 @@
 extends MarginContainer
 
+signal close
+signal open
+
 onready var icon = $Background/CenterContainer/Icon
 onready var anim = $AnimationPlayer
 onready var upper_eyelid = $Background/UpperEyelid
@@ -14,9 +17,11 @@ func _process(_delta):
 
 func close_eye():
 	anim.play("close")
+	emit_signal("close")
 
 func open_eye():
 	anim.play("open")
+	emit_signal("open")
 
 func set_closed():
 	upper_eyelid.set_value(100)

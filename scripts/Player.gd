@@ -19,6 +19,9 @@ var sprint_state
 
 var TimeToHighState = 10
 
+var time_to_resolution_downscale = 0
+var current_scale = 2
+
 enum {
 	WALK,
 	HEARTBEAT,
@@ -41,6 +44,9 @@ signal breathing_start			# start breathing state machine
 signal input_breath_pressed		# tells Breath space is held down
 signal input_breath_released	# tells Breath space was released
 signal balance_start			# start balance state machine
+
+signal downscale
+signal refresh_scale
 
 onready var raycast = $RayCast
 onready var animator = $AnimationPlayer
@@ -96,12 +102,20 @@ func _physics_process(delta):
 	process_UI(delta)
 
 
-func process_input(_delta):
+func process_input(delta):
+	
+	# time_to_resolution_downscale += delta
+	# if time_to_resolution_downscale >= 3:
+		# time_to_resolution_downscale = 0
+		# current_scale += 2
+		# emit_signal("downscale", current_scale)
 	
 	if Input.is_action_just_pressed("left_click"):
 		globals.eyeUI.close_eye()
 	if Input.is_action_just_released("left_click"):
 		globals.eyeUI.open_eye()
+		# emit_signal("refresh_scale")
+		# current_scale = 2
 	
 	if Input.is_action_pressed("breathe"):
 		emit_signal("input_breath_pressed")

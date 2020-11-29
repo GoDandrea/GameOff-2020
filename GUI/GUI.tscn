@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GUI/icons/heartUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GUI/icons/eyeUI.tscn" type="PackedScene" id=2]
@@ -7,9 +7,25 @@
 [ext_resource path="res://GUI/icons/brainUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://GUI/portraitUI.gd" type="Script" id=6]
 
+[sub_resource type="NoiseTexture" id=1]
+flags = 0
+width = 1024
+height = 600
+seamless = true
+
 [node name="GUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="TextureProgress" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1024, 600 )
+texture_progress = SubResource( 1 )
+fill_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -47,3 +63,5 @@ margin_right = 512.0
 [node name="eye" parent="MarginContainer/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 512.0
 margin_right = 640.0
+[connection signal="close" from="MarginContainer/HBoxContainer/eye" to="ProgressBar" method="set_value" binds= [ 100.0 ]]
+[connection signal="open" from="MarginContainer/HBoxContainer/eye" to="ProgressBar" method="set_value" binds= [ 0.0 ]]

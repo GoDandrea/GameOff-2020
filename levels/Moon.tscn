@@ -56,3 +56,5 @@ material = SubResource( 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
+[connection signal="downscale" from="ViewportContainer/Viewport/Player" to="ViewportContainer" method="set_stretch_shrink"]
+[connection signal="refresh_scale" from="ViewportContainer/Viewport/Player" to="ViewportContainer" method="set_stretch_shrink" binds= [ 2 ]]
