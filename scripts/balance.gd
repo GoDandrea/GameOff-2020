@@ -40,6 +40,7 @@ func tilt_camera():
 func _process(_delta):
 	
 	if tilt > 22 or tilt < -22:
+		emit_signal("sprint_fail")
 		force_fail()
 	
 	mouse_pos = get_viewport().get_mouse_position()

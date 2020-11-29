@@ -16,8 +16,8 @@ func _ready():
 func _process(_delta):
 	
 	if pointer_angle >= 90 or pointer_angle <= -90:
-		globals.player.abort_sprint()
-		reset()
+		pass
+		# reset()
 	
 
 

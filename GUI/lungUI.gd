@@ -18,7 +18,7 @@ func _process(_delta):
 	LEVEL = progress.get_value()
 	icon.set_scale(Vector2(1, 0.8 + LEVEL/500))
 	if LEVEL == 0 or LEVEL == 100:
-		globals.player.abort_sprint()
+		globals.player.abort_sprint("breath")
 
 func inspire(delta):
 	progress.set_value(LEVEL + FILL_RATE * delta)

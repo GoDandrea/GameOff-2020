@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Low Sprint Fail 01.wav-e86bb2fa6249a280d49fba5f3aaf3bfa.sample"
+
+[deps]
+
+source_file="res://Audio Assets/Footsteps/Moon/Fails/Low Sprint Fail 01.wav"
+dest_files=[ "res://.import/Low Sprint Fail 01.wav-e86bb2fa6249a280d49fba5f3aaf3bfa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -44,6 +44,8 @@ signal breathing_start			# start breathing state machine
 signal input_breath_pressed		# tells Breath space is held down
 signal input_breath_released	# tells Breath space was released
 signal balance_start			# start balance state machine
+signal Stumble
+signal Fall
 
 signal downscale
 signal refresh_scale
@@ -71,9 +73,9 @@ func _ready():
 	Balance = get_node("SprintStates/Balance")
 	Blink = get_node("SprintStates/Blink")
 	
-	Heartbeat.connect("sprint_fail", self, "abort_sprint")
-	Breath.connect("sprint_fail", self, "abort_sprint")
-	Balance.connect("sprint_fail", self, "abort_sprint")
+	Heartbeat.connect("sprint_fail", self, "abort_sprint", ["heartbeat"])
+	Breath.connect("sprint_fail", self, "abort_sprint", ["breath"])
+	Balance.connect("sprint_fail", self, "abort_sprint", ["balance"])
 
 
 func _process(delta):
@@ -173,7 +175,7 @@ func process_movement(delta):
 	if is_down == false:
 		collision = move_and_collide(movement_vec * SPEED * delta)
 	if collision and SPEED > 2.5:
-		abort_sprint()
+		abort_sprint("collision")
 
 func process_UI(_delta):
 	pass
@@ -184,18 +186,27 @@ func do_stumble():
 func stand_up():
 	is_down = false
 
-func abort_sprint():
+func abort_sprint(reason):
+	
+	# Reasons:
+	# collision
+	# heartbeat
+	# breath
+	# balance
+	
 	if sprint_aborted  == false:
 		sprint_aborted = true
 		sprint_state = FAIL
 		globals.portraitUI.hilight.show()
 		emit_signal("interrupt")
 		$SprintStates/Cooldown.start(5)
-		if sprint_duration < 9  and has_stumbled == false:
+		if sprint_duration < TimeToHighState  and has_stumbled == false: #changed this from number to var to keep consistency a
 			animator.play("stumble")
+			emit_signal("Stumble")
 		elif has_stumbled == false:
 			is_down = true
 			animator.play("fall_down")
+			emit_signal("Fall")
 		sprint_duration = 0.0
 
 func _on_Cooldown_timeout():
@@ -220,6 +231,3 @@ func set_SPRINT(value):
 func get_SPRINT():
 	return SPRINT_MOD
 
-
-func play(_extra_arg_0):
-	pass # Replace with function body.
