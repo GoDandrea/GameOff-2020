@@ -1,8 +1,10 @@
 extends Timer
 
 signal sprint_fail	# sprinting is to be interrupted in a failed state
-signal systole		# heart contracts; waiting player to press shift
-signal diastole		# player pressed shift; heart relaxes
+signal HighSystole		
+signal LowSystole
+signal HighDiastole
+signal LowDiastole	
 
 enum {
 	IDLE,
@@ -83,7 +85,8 @@ func idle_state():
 func sprint_state():
 	if get_time_left() < REFRESH_WINDOW:
 		state = REFRESH
-		emit_signal("systole")
+		if root.sprint_duration > root.TimeToHighState:	emit_signal("HighSystole")
+		else: emit_signal("LowSystole")
 		globals.heartUI.systole()
 		if $LowStressCirculation.get_volume_db() < LSCirculationMaxVolume: #Increase circulation volume if less than max
 			TweenFade.interpolate_property($LowStressCirculation, "volume_db", LSCirculationCurrentVolume, LSCirculationCurrentVolume +1, FadeInTime, 1, Tween.EASE_IN, 0) 
@@ -101,7 +104,8 @@ func sprint_state():
 func refresh_state():
 	if input_received:
 		input_received = false
-		emit_signal("diastole")
+		if root.sprint_duration > root.TimeToHighState:	emit_signal("HighDiastole")
+		else: emit_signal("LowDiastole")
 		globals.heartUI.diastole()
 		start(DURATION)
 		state = SPRINT

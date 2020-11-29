@@ -64,7 +64,6 @@ func breathing_stop():
 	if state == INSPIRE:
 		state = EXPIRE
 		if InhaleSwitch == 0: InhaleSwitch = 1
-
 	if ExhaleSwitch == 1 && Started == 1:
 		if root.sprint_duration > root.TimeToHighState:	emit_signal("ExhaleHigh")
 		else: emit_signal("ExhaleLow")
@@ -76,11 +75,8 @@ func _on_Breath_timeout():
 	emit_signal("sprint_fail")
 	Started = 0
 	print("failstate")
-	#if root.sprint_duration > root.TimeToHighState: 
-	$HighFail.play()
-		#yield(get_tree().create_timer(5.0), "timeout")
-		#$LowFail.play()
-	#else: $LowFail.play()
+	if root.sprint_duration > root.TimeToHighState: $HighFail.play()
+	else: $LowFail.play()
 
 func _on_Player_breathing_start():
 	globals.lungUI.progress.show()

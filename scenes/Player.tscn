@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=1]
 [ext_resource path="res://Audio Assets/Heart/Low Stress/Low Stress Diastole 2.wav" type="AudioStream" id=2]
@@ -68,6 +68,32 @@
 [ext_resource path="res://Audio Assets/Footsteps/Moon/Walk/Moon Walk Footstep 01.wav" type="AudioStream" id=66]
 [ext_resource path="res://scripts/balance.gd" type="Script" id=67]
 [ext_resource path="res://scripts/blink.gd" type="Script" id=68]
+[ext_resource path="res://Audio Assets/UI/UI Hover 01.wav" type="AudioStream" id=69]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Fails/High Sprint Fail 01.ogg" type="AudioStream" id=70]
+[ext_resource path="res://Audio Assets/UI/UI Hover 02.wav" type="AudioStream" id=71]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Fails/Low Sprint Fail 02.wav" type="AudioStream" id=72]
+[ext_resource path="res://Audio Assets/UI/UI Hover 04.wav" type="AudioStream" id=73]
+[ext_resource path="res://Audio Assets/UI/UI Click 02.wav" type="AudioStream" id=74]
+[ext_resource path="res://Audio Assets/UI/UI Click 03.wav" type="AudioStream" id=75]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Fails/High Sprint Fail 02.ogg" type="AudioStream" id=76]
+[ext_resource path="res://Audio Assets/UI/UI Hover 05.wav" type="AudioStream" id=77]
+[ext_resource path="res://Audio Assets/UI/UI Click 01.wav" type="AudioStream" id=78]
+[ext_resource path="res://Audio Assets/UI/UI Click 04.wav" type="AudioStream" id=79]
+[ext_resource path="res://Audio Assets/UI/UI Click 05.wav" type="AudioStream" id=80]
+[ext_resource path="res://Audio Assets/UI/UI Hover 03.wav" type="AudioStream" id=81]
+[ext_resource path="res://Audio Assets/Footsteps/Moon/Fails/Low Sprint Fail 03.wav" type="AudioStream" id=82]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Diastole 1.wav" type="AudioStream" id=83]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Diastole 5.wav" type="AudioStream" id=84]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Diastole 2.wav" type="AudioStream" id=85]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Systole 4.wav" type="AudioStream" id=86]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Systole 5.wav" type="AudioStream" id=87]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Diastole 6.wav" type="AudioStream" id=88]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Systole 1.wav" type="AudioStream" id=89]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Systole 6.wav" type="AudioStream" id=90]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Systole 2.wav" type="AudioStream" id=91]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Systole 3.wav" type="AudioStream" id=92]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Diastole 4.wav" type="AudioStream" id=93]
+[ext_resource path="res://Audio Assets/Heart/High Stress/High Stress Diastole 3.wav" type="AudioStream" id=94]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.567861
@@ -402,6 +428,33 @@ bus = "Heartbeat"
 stream = ExtResource( 18 )
 bus = "Heartbeat"
 
+[node name="HighDiastole" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="High Stress Diastole 1" type="AudioStreamPlayer" parent="AudioLibrary/HighDiastole"]
+stream = ExtResource( 83 )
+bus = "Heartbeat"
+
+[node name="High Stress Diastole 2" type="AudioStreamPlayer" parent="AudioLibrary/HighDiastole"]
+stream = ExtResource( 85 )
+bus = "Heartbeat"
+
+[node name="High Stress Diastole 3" type="AudioStreamPlayer" parent="AudioLibrary/HighDiastole"]
+stream = ExtResource( 94 )
+bus = "Heartbeat"
+
+[node name="High Stress Diastole 4" type="AudioStreamPlayer" parent="AudioLibrary/HighDiastole"]
+stream = ExtResource( 93 )
+bus = "Heartbeat"
+
+[node name="High Stress Diastole 5" type="AudioStreamPlayer" parent="AudioLibrary/HighDiastole"]
+stream = ExtResource( 84 )
+bus = "Heartbeat"
+
+[node name="High Stress Diastole 6" type="AudioStreamPlayer" parent="AudioLibrary/HighDiastole"]
+stream = ExtResource( 88 )
+bus = "Heartbeat"
+
 [node name="LowSystole" type="Node" parent="AudioLibrary"]
 script = ExtResource( 20 )
 
@@ -435,6 +488,33 @@ bus = "Heartbeat"
 
 [node name="Low Stress Systole 8" type="AudioStreamPlayer" parent="AudioLibrary/LowSystole"]
 stream = ExtResource( 7 )
+bus = "Heartbeat"
+
+[node name="HighSystole" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="High Stress Systole 1" type="AudioStreamPlayer" parent="AudioLibrary/HighSystole"]
+stream = ExtResource( 89 )
+bus = "Heartbeat"
+
+[node name="High Stress Systole 2" type="AudioStreamPlayer" parent="AudioLibrary/HighSystole"]
+stream = ExtResource( 91 )
+bus = "Heartbeat"
+
+[node name="High Stress Systole 3" type="AudioStreamPlayer" parent="AudioLibrary/HighSystole"]
+stream = ExtResource( 92 )
+bus = "Heartbeat"
+
+[node name="High Stress Systole 4" type="AudioStreamPlayer" parent="AudioLibrary/HighSystole"]
+stream = ExtResource( 86 )
+bus = "Heartbeat"
+
+[node name="High Stress Systole 5" type="AudioStreamPlayer" parent="AudioLibrary/HighSystole"]
+stream = ExtResource( 87 )
+bus = "Heartbeat"
+
+[node name="High Stress Systole 6" type="AudioStreamPlayer" parent="AudioLibrary/HighSystole"]
+stream = ExtResource( 90 )
 bus = "Heartbeat"
 
 [node name="LowInhale" type="Node" parent="AudioLibrary"]
@@ -629,10 +709,86 @@ bus = "MoonSteps"
 [node name="MoonWalkStep 7" type="AudioStreamPlayer" parent="AudioLibrary/MoonWalkFootstep"]
 stream = ExtResource( 55 )
 bus = "MoonSteps"
+
+[node name="UIHover" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="UI Hover 1" type="AudioStreamPlayer" parent="AudioLibrary/UIHover"]
+stream = ExtResource( 69 )
+bus = "MoonSteps"
+
+[node name="UI Hover 2" type="AudioStreamPlayer" parent="AudioLibrary/UIHover"]
+stream = ExtResource( 71 )
+bus = "MoonSteps"
+
+[node name="UI Hover 3" type="AudioStreamPlayer" parent="AudioLibrary/UIHover"]
+stream = ExtResource( 81 )
+bus = "MoonSteps"
+
+[node name="UI Hover 4" type="AudioStreamPlayer" parent="AudioLibrary/UIHover"]
+stream = ExtResource( 73 )
+bus = "MoonSteps"
+
+[node name="UI Hover 5" type="AudioStreamPlayer" parent="AudioLibrary/UIHover"]
+stream = ExtResource( 77 )
+bus = "MoonSteps"
+
+[node name="UIClick" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="UI Click 1" type="AudioStreamPlayer" parent="AudioLibrary/UIClick"]
+stream = ExtResource( 78 )
+bus = "MoonSteps"
+
+[node name="UI Click 2" type="AudioStreamPlayer" parent="AudioLibrary/UIClick"]
+stream = ExtResource( 74 )
+bus = "MoonSteps"
+
+[node name="UI Click 3" type="AudioStreamPlayer" parent="AudioLibrary/UIClick"]
+stream = ExtResource( 75 )
+bus = "MoonSteps"
+
+[node name="UI Click 4" type="AudioStreamPlayer" parent="AudioLibrary/UIClick"]
+stream = ExtResource( 79 )
+bus = "MoonSteps"
+
+[node name="UI Click 5" type="AudioStreamPlayer" parent="AudioLibrary/UIClick"]
+stream = ExtResource( 80 )
+bus = "MoonSteps"
+
+[node name="HighSprintFail" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="High Sprint Fail 1" type="AudioStreamPlayer" parent="AudioLibrary/HighSprintFail"]
+stream = ExtResource( 70 )
+bus = "MoonSteps"
+
+[node name="High Sprint Fail 2" type="AudioStreamPlayer" parent="AudioLibrary/HighSprintFail"]
+stream = ExtResource( 76 )
+bus = "MoonSteps"
+
+[node name="LowSprintFail" type="Node" parent="AudioLibrary"]
+script = ExtResource( 20 )
+
+[node name="Low Sprint Fail 1" type="AudioStreamPlayer" parent="AudioLibrary/LowSprintFail"]
+stream = ExtResource( 72 )
+bus = "MoonSteps"
+
+[node name="Low Sprint Fail 2" type="AudioStreamPlayer" parent="AudioLibrary/LowSprintFail"]
+stream = ExtResource( 72 )
+bus = "MoonSteps"
+
+[node name="Low Sprint Fail 3" type="AudioStreamPlayer" parent="AudioLibrary/LowSprintFail"]
+stream = ExtResource( 82 )
+bus = "MoonSteps"
+[connection signal="Fall" from="." to="AudioLibrary" method="play" binds= [ "HighSprintFail" ]]
+[connection signal="Stumble" from="." to="AudioLibrary" method="play" binds= [ "LowSprintFail" ]]
 [connection signal="balance_start" from="." to="SprintStates/Balance" method="_on_Player_balance_start"]
 [connection signal="breathing_start" from="." to="SprintStates/Breath" method="_on_Player_breathing_start"]
-[connection signal="diastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
-[connection signal="systole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
+[connection signal="HighDiastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "HighDiastole" ]]
+[connection signal="HighSystole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "HighSystole" ]]
+[connection signal="LowDiastole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowDiastole" ]]
+[connection signal="LowSystole" from="SprintStates/Heartbeat" to="AudioLibrary" method="play" binds= [ "LowSystole" ]]
 [connection signal="timeout" from="SprintStates/Heartbeat" to="SprintStates/Heartbeat" method="_on_Heartbeat_timeout"]
 [connection signal="ExhaleHigh" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "HighExhale" ]]
 [connection signal="ExhaleLow" from="SprintStates/Breath" to="AudioLibrary" method="play" binds= [ "LowExhale" ]]

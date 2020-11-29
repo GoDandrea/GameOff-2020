@@ -41,6 +41,8 @@ signal breathing_start			# start breathing state machine
 signal input_breath_pressed		# tells Breath space is held down
 signal input_breath_released	# tells Breath space was released
 signal balance_start			# start balance state machine
+signal Stumble
+signal Fall
 
 onready var raycast = $RayCast
 onready var animator = $AnimationPlayer
@@ -177,11 +179,13 @@ func abort_sprint():
 		globals.portraitUI.hilight.show()
 		emit_signal("interrupt")
 		$SprintStates/Cooldown.start(5)
-		if sprint_duration < 9  and has_stumbled == false:
+		if sprint_duration < TimeToHighState  and has_stumbled == false: #changed this from number to var to keep consistency a
 			animator.play("stumble")
+			emit_signal("Stumble")
 		elif has_stumbled == false:
 			is_down = true
 			animator.play("fall_down")
+			emit_signal("Fall")
 		sprint_duration = 0.0
 
 func _on_Cooldown_timeout():
@@ -206,6 +210,3 @@ func set_SPRINT(value):
 func get_SPRINT():
 	return SPRINT_MOD
 
-
-func play(_extra_arg_0):
-	pass # Replace with function body.
