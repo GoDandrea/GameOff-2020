@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://GUI/GUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Audio Assets/UI/Open Menu.ogg" type="AudioStream" id=6]
 [ext_resource path="res://resources/lunarrock_diffuse.png" type="Texture" id=7]
 [ext_resource path="res://Audio Assets/UI/Close Menu.ogg" type="AudioStream" id=8]
+[ext_resource path="res://scripts/viewport_container.gd" type="Script" id=9]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.764706, 0.760784, 0.713726, 1 )
@@ -37,6 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
 stretch_shrink = 2
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,5 +66,3 @@ stream = ExtResource( 6 )
 
 [node name="Menu Close" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-[connection signal="downscale" from="ViewportContainer/Viewport/Player" to="ViewportContainer" method="set_stretch_shrink"]
-[connection signal="refresh_scale" from="ViewportContainer/Viewport/Player" to="ViewportContainer" method="set_stretch_shrink" binds= [ 2 ]]

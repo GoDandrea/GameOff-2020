@@ -3,6 +3,7 @@ extends MarginContainer
 onready var icon = $Background/CenterContainer/Icon
 onready var hilight = $Background/Hilight
 onready var progress = $Background/ProgressBar
+onready var space_icon = get_parent().get_parent().get_node("HBoxContainer2/Control3/space")
 
 onready var FILL_RATE = 45		# how much the bar fills per second
 onready var EMPTY_RATE = 60		# how much is empties per second

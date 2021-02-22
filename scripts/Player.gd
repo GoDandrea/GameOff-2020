@@ -1,175 +1,167 @@
 extends KinematicBody
 
-var GRAVITY = -24.8
-var SPEED = 2.5 setget set_SPEED, get_SPEED
-var SPRINT_MOD = 1.5 setget set_SPRINT, get_SPRINT
-var ACCEL = 0.01
 
+# Signals
+signal sprint_failed			# tells SprintStates that sprint has failed
+signal sprint_ready				# sprint cooldown is over
+signal input_heartbeat			# tell Heart the player pressed shift
+
+signal start_lungs				# start Lungs state machine
+signal input_breath_pressed		# tell Lungs space is held down
+signal input_breath_released	# tell Lungs space was released
+
+signal start_brain				# start Brain state machine
+
+signal start_eyes				# start Eyes state machine
+signal input_blink_pressed		# tell Eyes mouse1 is held down
+signal input_blink_released		# tell Eyes mouse1 was released
+
+signal player_stumbled
+signal player_fell
+
+# Enums
+enum {
+	STANDING,
+	WALKING,
+	STUMBLING,
+	FALLING,
+	SPRINT_HEART,
+	SPRINT_LUNGS,
+	SPRINT_BRAIN,
+	SPRINT_EYES,
+}
+
+# Constants
+const LUNGS_START = 5
+const BRAIN_START = 9
+const EYES_START = 15
+
+const GRAVITY = -24.8
+const SPEED = 2.5
+const SPRINT_MOD = 2
+const ACCEL = 0.01
+
+# User-defined variables
 var MOUSE_SENS = 0.5
 var ROT_SENS = 1.2
 
+# Movement variables
 var movement_vec = Vector3()
 var rot_degrees = 0
 var is_moving = false
 var collision
-
 var sprint_duration = 0.0
+var is_sprinting = false
 var stress = 0
-var sprint_state
+var player_state = STANDING
 
 var TimeToHighState = 10
 
-var time_to_resolution_downscale = 0
-var current_scale = 2
+var in_cooldown = false
+var has_stumbled = false
+var is_down = false
 
-enum {
-	WALK,
-	HEARTBEAT,
-	BREATH,
-	BALANCE,
-	BLINK,
-	FAIL
-}
-
-# these will be assigned the nodes for each part of the sprint system
-var Heartbeat
-var Breath
-var Balance
-var Blink
-
-signal interrupt				# if a sprint system fails, tells the other systems to force_fail()
-signal sprint_ready				# tells when the sprint cooldowwn is over
-signal input_heartbeat			# tells Heartbeat the player pressed shift
-signal breathing_start			# start breathing state machine
-signal input_breath_pressed		# tells Breath space is held down
-signal input_breath_released	# tells Breath space was released
-signal balance_start			# start balance state machine
-signal Stumble
-signal Fall
-
-signal downscale
-signal refresh_scale
+# Onready variables (can only be assigned nodes once Player is in Node-tree)
+onready var node_heart = $SprintStates/Heart
+onready var node_lungs = $SprintStates/Lungs
+onready var node_brain = $SprintStates/Brain
+onready var node_eyes = $SprintStates/Eyes
+onready var node_cooldown = $Cooldown
 
 onready var raycast = $RayCast
 onready var animator = $AnimationPlayer
- 
+
 onready var cursor = load("res://sprites/crosshair.png")
 
-onready var sprint_aborted = false
-onready var has_stumbled = false
-onready var is_down = false
 
+# Called when this object is first created
+func _init():
+	pass
+
+
+# Called when all this object's children were created and are ready
 func _ready():
-	
+
 	globals.player = self
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	Input.set_custom_mouse_cursor(cursor)
 	
-	sprint_state = WALK
+	node_heart.connect("sprint_failed", self, "abort_sprint", ["heart"])
+	node_lungs.connect("sprint_failed", self, "abort_sprint", ["lung"])
+	node_brain.connect("sprint_failed", self, "abort_sprint", ["brain"])
 	
-	Heartbeat = get_node("SprintStates/Heartbeat")
-	Breath = get_node("SprintStates/Breath")
-	Balance = get_node("SprintStates/Balance")
-	Blink = get_node("SprintStates/Blink")
-	
-	Heartbeat.connect("sprint_fail", self, "abort_sprint", ["heartbeat"])
-	Breath.connect("sprint_fail", self, "abort_sprint", ["breath"])
-	Balance.connect("sprint_fail", self, "abort_sprint", ["balance"])
+	node_cooldown.connect("timeout", self, "_on_Cooldown_timeout")
 
 
+# Called every frame, with no regular interval between them (hence "delta")
 func _process(delta):
 	
-	if sprint_state != WALK and sprint_state != FAIL:
+	if is_sprinting:
 		sprint_duration += delta
-	
-	if sprint_state == HEARTBEAT:
-		if sprint_duration > 5:
-			sprint_state = BREATH
-			emit_signal("breathing_start")
-	
-	if sprint_state == BREATH:
-		if sprint_duration > 9:
-			sprint_state = BALANCE
-			emit_signal("balance_start")
-	
+		
+		match player_state:
+			SPRINT_HEART:
+				if sprint_duration > LUNGS_START:
+					player_state = SPRINT_LUNGS
+					emit_signal("start_lungs")
+			SPRINT_LUNGS:
+				if sprint_duration > BRAIN_START:
+					player_state = SPRINT_BRAIN
+					emit_signal("start_brain")
+			SPRINT_BRAIN:
+				if sprint_duration > EYES_START:
+					player_state = SPRINT_EYES
+					emit_signal("start_eyes")
 	
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
 
- 
+
+# Called in regular intervals (~60 times per second)
 func _physics_process(delta):
-	process_input(delta)
-	process_movement(delta)
-	process_UI(delta)
-
-
-func process_input(delta):
 	
-	# time_to_resolution_downscale += delta
-	# if time_to_resolution_downscale >= 3:
-		# time_to_resolution_downscale = 0
-		# current_scale += 2
-		# emit_signal("downscale", current_scale)
-	
-	if Input.is_action_just_pressed("left_click"):
-		globals.eyeUI.close_eye()
-	if Input.is_action_just_released("left_click"):
-		globals.eyeUI.open_eye()
-		# emit_signal("refresh_scale")
-		# current_scale = 2
-	
-	if Input.is_action_pressed("breathe"):
-		emit_signal("input_breath_pressed")
-	else:
-		emit_signal("input_breath_released")
-	
-	if Input.is_action_just_pressed("heartbeat"):
-		# avoid queing input signals
-		if $SprintStates/Cooldown.is_stopped():
-			emit_signal("input_heartbeat")
-			sprint_state = HEARTBEAT
-		
 	movement_vec = Vector3()
 	rot_degrees = 0
+	
+	var move_speed = SPEED
+	if is_sprinting:
+		move_speed *= SPRINT_MOD
+	
 	if Input.is_action_pressed("move_forward"):
-		movement_vec.z -= 1
+		movement_vec.z -= move_speed
 	if Input.is_action_pressed("move_backward"):
-		movement_vec.z += 1
+		movement_vec.z += move_speed
 	if Input.is_action_pressed("move_left"):
 		rot_degrees += ROT_SENS
-	if Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("move_right"):
 		rot_degrees -= ROT_SENS
-	
-
-
-func process_movement(delta):
+	else:
+		rot_degrees = 0
 	
 	movement_vec = movement_vec.normalized()
-	if sprint_state != WALK:
+	if movement_vec.z == 0:
+		if player_state == WALKING:
+			player_state = STANDING
+	elif player_state == STANDING:
+		player_state = WALKING
+	
+	if player_state >= SPRINT_HEART:
 		movement_vec = movement_vec.rotated(Vector3(0, 1, 0), rotation.y) * SPRINT_MOD
 		rotation_degrees.y += rot_degrees/2
 	else:
 		movement_vec = movement_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		rotation_degrees.y += rot_degrees
-
-	if sprint_state == WALK or (sprint_state == FAIL and has_stumbled):
-		if movement_vec != Vector3(0, 0, 0):
+	
+	match player_state:
+		STANDING:
+			animator.stop(true)
+		WALKING:
 			animator.play("walk")
-		else:
-			animator.stop(true)
-	
-	if sprint_state == HEARTBEAT:
-		if movement_vec != Vector3(0, 0, 0):
+		SPRINT_HEART:
 			animator.play("low_sprint")
-		else:
-			animator.stop(true)
-	
-	if sprint_state in [BREATH, BALANCE, BLINK]:
-		if movement_vec != Vector3(0, 0, 0):
+		SPRINT_LUNGS, SPRINT_BRAIN, SPRINT_EYES:
 			animator.play("high_sprint")
-		else:
-			animator.stop(true)
 	
 	# this collision data can be used to make better collision failures eventually
 	if is_down == false:
@@ -177,8 +169,43 @@ func process_movement(delta):
 	if collision and SPEED > 2.5:
 		abort_sprint("collision")
 
-func process_UI(_delta):
-	pass
+
+#### TODO:
+# Get action from input event, get the action's name as string, and use match
+# to get the action without using so many ifs.
+# Maybe it's faster, but it's definitely less ugly. 
+
+
+# Called only when a key input isn't handled by something else (like UI)
+func _unhandled_key_input(_event):
+	
+	if Input.is_action_just_pressed("heartbeat"):
+		if player_state == WALKING:
+			player_state = SPRINT_HEART
+		is_sprinting = true
+		emit_signal("input_heartbeat")
+	
+	if Input.is_action_pressed("breathe"):
+		emit_signal("input_breath_pressed")
+	elif Input.is_action_just_released("breathe"):
+		emit_signal("input_breath_released")
+	
+
+
+# Same as _unhandled_key_input, but will be used for mouse events only
+#func _unhandled_input(_event):
+func _input(_event):
+	
+	if Input.is_action_just_pressed("left_click"):
+		pass
+		#emit_signal("input_blink_pressed")
+		#globals.eyeUI.close_eye()
+		#print("close eye")
+	elif Input.is_action_just_released("left_click"):
+		pass
+		#emit_signal("input_blink_released")
+		#globals.eyeUI.open_eye()
+		#print("open eye")
 
 func do_stumble():
 	has_stumbled = true
@@ -186,48 +213,42 @@ func do_stumble():
 func stand_up():
 	is_down = false
 
-func abort_sprint(reason):
+func abort_sprint(_reason):
 	
 	# Reasons:
 	# collision
-	# heartbeat
-	# breath
-	# balance
+	# heart
+	# lung
+	# brain
 	
-	if sprint_aborted  == false:
-		sprint_aborted = true
-		sprint_state = FAIL
+	if in_cooldown == false:
+		is_sprinting = false
+		in_cooldown = true
+		
 		globals.portraitUI.hilight.show()
-		emit_signal("interrupt")
-		$SprintStates/Cooldown.start(5)
-		if sprint_duration < TimeToHighState  and has_stumbled == false: #changed this from number to var to keep consistency a
+		emit_signal("sprint_failed")
+		
+		if sprint_duration < TimeToHighState and has_stumbled == false:
+			$Cooldown.start(3)
+			player_state = STUMBLING
 			animator.play("stumble")
-			emit_signal("Stumble")
+			emit_signal("player_stumbled")
+		
 		elif has_stumbled == false:
+			$Cooldown.start(5)
+			player_state = FALLING
 			is_down = true
 			animator.play("fall_down")
-			emit_signal("Fall")
+			emit_signal("player_fell")
+		
 		sprint_duration = 0.0
 
 func _on_Cooldown_timeout():
+	
 	globals.portraitUI.hilight.hide()
-	sprint_aborted = false
-	sprint_state = WALK
+	in_cooldown = false
+	player_state = STANDING
 	has_stumbled = false
 	emit_signal("sprint_ready")
 
-# SETGET FUNCTIONS #############################################################
-# SPEED
-func set_SPEED(value):
-	SPEED = value
-
-func get_SPEED():
-	return SPEED
-
-# SPRINT_MOD
-func set_SPRINT(value):
-	SPRINT_MOD = value
-
-func get_SPRINT():
-	return SPRINT_MOD
 

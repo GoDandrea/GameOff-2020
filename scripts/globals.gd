@@ -1,6 +1,8 @@
 extends Node
 
 var player
+var viewport_container
+var res_scale
 
 # UI variables
 var heartUI
