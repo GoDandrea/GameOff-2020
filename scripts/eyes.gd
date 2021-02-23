@@ -1,8 +1,5 @@
 extends Node
 
-signal downscale
-signal refresh_scale
-
 enum {
 	IDLE,
 	BLINKING,
@@ -13,17 +10,22 @@ enum {
 onready var state = IDLE
 onready var root = get_parent().get_parent()
 onready var camera = root.get_node("Camera")
+onready var viewport = get_viewport()
+onready var viewport_container = viewport.get_parent()
 
+var DEFAULT_SCALE = 2
 var current_scale = 2
 var time_to_resolution_downscale = 0
-var downscale_delay = 2
+var downscale_delay = 1
 
 
 func _ready():
+	
 	root.connect("sprint_failed", self, "force_fail")
-	root.connect("start_eyes", self, "_on_Plyer_blink_start")
+	root.connect("start_eyes", self, "_on_Player_blink_start")
 	root.connect("input_blink_pressed", self, "do_blink")
 	root.connect("input_blink_released", self, "undo_blink")
+	root.connect("sprint_ready", self, "_on_sprint_ready")
 
 
 func _on_Player_blink_start():
@@ -42,9 +44,9 @@ func undo_blink():
 
 
 func force_fail():
-	emit_signal("refresh_scale")
-	current_scale = 2
 	state = FAIL
+	viewport_container.set_stretch_shrink(DEFAULT_SCALE)
+	current_scale = DEFAULT_SCALE
 
 
 func _process(delta):
@@ -65,8 +67,8 @@ func idle_state():
 
 
 func blinking_state():
-	emit_signal("refresh_scale")
-	current_scale = 2
+	viewport_container.set_stretch_shrink(DEFAULT_SCALE)
+	current_scale = DEFAULT_SCALE
 
 
 func not_blinking_state(delta):
@@ -74,8 +76,13 @@ func not_blinking_state(delta):
 	if time_to_resolution_downscale >= downscale_delay:
 		time_to_resolution_downscale = 0
 		current_scale += 1
-		emit_signal("downscale", current_scale)
+		viewport_container.set_stretch_shrink(current_scale)
 
 
 func fail_state():
-	state = IDLE
+	pass
+
+
+func _on_sprint_ready():
+	if state == FAIL:
+		state = IDLE

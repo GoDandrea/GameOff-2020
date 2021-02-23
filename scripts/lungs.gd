@@ -43,6 +43,7 @@ func _ready():
 	root.connect("sprint_failed", self, "force_fail")
 	root.connect("input_breath_pressed", self, "inhale")
 	root.connect("input_breath_released", self, "exhale")
+	root.connect("sprint_ready", self, "_on_sprint_ready")
 	
 #	Verb.dry = 0.5
 #	Verb.wet = 0.1
@@ -52,7 +53,11 @@ func _ready():
 
 
 func force_fail():
+	
 	state = FAIL
+	globals.lungUI.progress.set_value(default_size)
+	globals.lungUI.progress.hide()
+	globals.lungUI.space_icon.hide()
 	is_breathing = false
 
 
@@ -133,9 +138,10 @@ func expire_state(delta):
 
 
 func fail_state():
-	globals.lungUI.progress.set_value(default_size)
-	globals.lungUI.progress.hide()
-	globals.lungUI.space_icon.hide()
-	state = IDLE
-	is_breathing = false
+	pass
+
+
+func _on_sprint_ready():
+	if state == FAIL:
+		state = IDLE
 

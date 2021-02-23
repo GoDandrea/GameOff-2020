@@ -30,6 +30,7 @@ func _ready():
 	self.connect("timeout", self, "_on_timeout")
 	root.connect("sprint_failed", self, "force_fail")
 	root.connect("input_heartbeat", self, "beat_heart")
+	root.connect("sprint_ready", self, "_on_sprint_ready")
 
 
 func beat_heart():
@@ -37,7 +38,10 @@ func beat_heart():
 
 
 func force_fail():
+	
 	state = FAIL
+	stop()
+	globals.heartUI.reset()
 
 
 func _on_timeout():
@@ -112,6 +116,9 @@ func refresh_state():
 
 
 func fail_state():
-	stop()
-	globals.heartUI.reset()
-	state = IDLE
+	pass
+
+
+func _on_sprint_ready():
+	if state == FAIL:
+		state = IDLE

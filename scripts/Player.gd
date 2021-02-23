@@ -34,7 +34,7 @@ enum {
 # Constants
 const LUNGS_START = 5
 const BRAIN_START = 9
-const EYES_START = 15
+const EYES_START = 11
 
 const GRAVITY = -24.8
 const SPEED = 2.5
@@ -71,8 +71,6 @@ onready var node_cooldown = $Cooldown
 onready var raycast = $RayCast
 onready var animator = $AnimationPlayer
 
-onready var cursor = load("res://sprites/crosshair.png")
-
 
 # Called when this object is first created
 func _init():
@@ -85,7 +83,6 @@ func _ready():
 	globals.player = self
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	Input.set_custom_mouse_cursor(cursor)
 	
 	node_heart.connect("sprint_failed", self, "abort_sprint", ["heart"])
 	node_lungs.connect("sprint_failed", self, "abort_sprint", ["lung"])
@@ -101,14 +98,17 @@ func _process(delta):
 		sprint_duration += delta
 		
 		match player_state:
+			
 			SPRINT_HEART:
 				if sprint_duration > LUNGS_START:
 					player_state = SPRINT_LUNGS
 					emit_signal("start_lungs")
+					
 			SPRINT_LUNGS:
 				if sprint_duration > BRAIN_START:
 					player_state = SPRINT_BRAIN
 					emit_signal("start_brain")
+
 			SPRINT_BRAIN:
 				if sprint_duration > EYES_START:
 					player_state = SPRINT_EYES
@@ -189,6 +189,11 @@ func _unhandled_key_input(_event):
 		emit_signal("input_breath_pressed")
 	elif Input.is_action_just_released("breathe"):
 		emit_signal("input_breath_released")
+	
+	if Input.is_action_just_pressed("left_click"):
+		emit_signal("input_blink_pressed")
+	elif Input.is_action_just_released("left_click"):
+		emit_signal("input_blink_released")
 	
 
 

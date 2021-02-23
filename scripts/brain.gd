@@ -26,6 +26,7 @@ func _ready():
 	randomize()
 	root.connect("start_brain", self, "_on_Player_balance_start")
 	root.connect("sprint_failed", self, "force_fail")
+	root.connect("sprint_ready", self, "_on_sprint_ready")
 
 
 
@@ -65,11 +66,12 @@ func balancing_state():
 
 
 func fail_state():
-	
-	globals.brainUI.reset()
-	set_tilt(0)
-	globals.viewport_container.set_stretch_shrink(2)
-	state = IDLE
+	pass
+
+
+func _on_sprint_ready():
+	if state == FAIL:
+		state = IDLE
 
 
 func _on_Player_balance_start():
@@ -88,7 +90,11 @@ func _on_Player_balance_start():
 
 
 func force_fail():
+	
 	state = FAIL
+	globals.brainUI.reset()
+	set_tilt(0)
+	globals.viewport_container.set_stretch_shrink(2)
 
 
 func add_tilt(tilt):
