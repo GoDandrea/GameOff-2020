@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GUI/icons/brain.png" type="Texture" id=1]
-[ext_resource path="res://GUI/iconUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://GUI/brainUI.gd" type="Script" id=3]
+[ext_resource path="res://GUI/HUD/iconUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GUI/HUD/brainUI.gd" type="Script" id=3]
+
 
 [node name="Brain" instance=ExtResource( 2 )]
 script = ExtResource( 3 )

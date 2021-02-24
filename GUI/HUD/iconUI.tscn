@@ -4,9 +4,9 @@
 [ext_resource path="res://GUI/icons/background.png" type="Texture" id=2]
 [ext_resource path="res://GUI/icons/portrait.png" type="Texture" id=3]
 [ext_resource path="res://sprites/gauge_background.png" type="Texture" id=4]
-[ext_resource path="res://sprites/gauge_pointer.png" type="Texture" id=5]
+[ext_resource path="res://sprites/lower_eyelid.png" type="Texture" id=5]
 [ext_resource path="res://sprites/upper_eyelid.png" type="Texture" id=6]
-[ext_resource path="res://sprites/lower_eyelid.png" type="Texture" id=7]
+[ext_resource path="res://sprites/gauge_pointer.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.823529, 0.945098, 1, 0.145098 )
@@ -72,7 +72,7 @@ margin_right = -88.0
 margin_bottom = -88.0
 rect_min_size = Vector2( 128, 128 )
 rect_pivot_offset = Vector2( 64, 122 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -111,7 +111,7 @@ anchor_bottom = 1.0
 rect_min_size = Vector2( 128, 128 )
 rect_pivot_offset = Vector2( 64, 64 )
 rect_clip_content = true
-texture_progress = ExtResource( 7 )
+texture_progress = ExtResource( 5 )
 fill_mode = 3
 
 [node name="Frame" type="TextureRect" parent="Background"]

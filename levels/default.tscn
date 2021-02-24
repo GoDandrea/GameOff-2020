@@ -3,8 +3,9 @@
 [ext_resource path="res://resources/tiles.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Lamp.tscn" type="PackedScene" id=3]
-[ext_resource path="res://GUI/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GUI/HUD/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/space_panorama.exr" type="Texture" id=5]
+
 
 
 [sub_resource type="PanoramaSky" id=3]
