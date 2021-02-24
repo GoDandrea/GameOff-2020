@@ -3,6 +3,7 @@
 [ext_resource path="res://GUI/ui_elements/MenuButton.tscn" type="PackedScene" id=1]
 
 [node name="ContinueButton" instance=ExtResource( 1 )]
+scene_to_load = "res://levels/Moon.tscn"
 
 [node name="Label" parent="." index="0"]
 text = "Continue"
