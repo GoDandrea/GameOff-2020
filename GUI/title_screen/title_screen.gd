@@ -1,20 +1,23 @@
 extends Control
 
+const MOON_LEVEL = "res://levels/Moon.tscn"
 
 func _ready():
 	for button in $ColorRect/Buttons.get_children():
-		button.connect("pressed", self, "_on_Button_pressed", [button.scene_to_load])
+		button.connect("pressed", self, "_on_Button_pressed", [button.on_press_command])
 
 
-func _on_Button_pressed(target_scene):
+func _on_Button_pressed(button_command):
 	
-	match target_scene:
+	match button_command:
+		"new game":
+			transition_to(MOON_LEVEL)
+		"continue":
+			transition_to(MOON_LEVEL)
 		"options":
 			continue
 		"quit":
 			get_tree().quit()
-		_:
-			transition_to(target_scene)
 
 
 func transition_to(target_scene):

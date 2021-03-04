@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://GUI/HUD/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/terrain.gd" type="Script" id=3]
 [ext_resource path="res://resources/space_panorama.exr" type="Texture" id=4]
-[ext_resource path="res://resources/lunarrock_specular.png" type="Texture" id=5]
+[ext_resource path="res://resources/pixel_moon_ground.png" type="Texture" id=5]
 [ext_resource path="res://Audio Assets/UI/Open Menu.ogg" type="AudioStream" id=6]
-[ext_resource path="res://resources/lunarrock_diffuse.png" type="Texture" id=7]
+[ext_resource path="res://resources/pixel_moon_normal.png" type="Texture" id=7]
 [ext_resource path="res://Audio Assets/UI/Close Menu.ogg" type="AudioStream" id=8]
 [ext_resource path="res://scripts/viewport_container.gd" type="Script" id=9]
-[ext_resource path="res://scripts/pause.gd" type="Script" id=10]
+[ext_resource path="res://GUI/pause_menu/PauseMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/pixel_moon_spec.png" type="Texture" id=11]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 4 )
@@ -21,17 +22,28 @@ background_sky_orientation = Basis( 1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5
 ambient_light_color = Color( 0.913725, 0.905882, 0.807843, 0.596078 )
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.764706, 0.760784, 0.713726, 1 )
-albedo_texture = ExtResource( 7 )
-roughness_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 5 )
+metallic = 0.5
+metallic_specular = 0.21
+metallic_texture = ExtResource( 11 )
+metallic_texture_channel = 4
+roughness = 0.33
+roughness_texture = ExtResource( 11 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = -1.8
+normal_texture = ExtResource( 7 )
+anisotropy_enabled = true
+anisotropy = 1.0
+uv1_scale = Vector3( 0.25, 0.3, 0.25 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.68179
 
 [node name="Moon" type="Spatial"]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.879952, 0.313819, -0.356655, 0.217053, 0.402229, 0.889438, 0.422579, -0.860076, 0.285827, 0, 9.93044, 0 )
-light_energy = 0.5
+transform = Transform( 0.896927, 0.00696556, -0.442123, 0.368811, 0.539792, 0.756705, 0.243925, -0.84177, 0.481585, 0, 9.93044, 0 )
 light_indirect_energy = 0.5
-light_specular = 0.23
 directional_shadow_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -73,20 +85,5 @@ material = SubResource( 3 )
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="Pause" type="Control" parent="PauseLayer"]
-pause_mode = 2
+[node name="PauseMenu" parent="PauseLayer" instance=ExtResource( 10 )]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DarkOverlay" type="ColorRect" parent="PauseLayer/Pause"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.392157 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

@@ -359,6 +359,7 @@ __meta__ = {
 
 [node name="Camera" type="Camera" parent="."]
 current = true
+near = 0.5
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true

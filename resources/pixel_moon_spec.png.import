@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/lunarrock_diffuse.png-a0e21482d69d766f7b1585d9ec638575.s3tc.stex"
-path.etc2="res://.import/lunarrock_diffuse.png-a0e21482d69d766f7b1585d9ec638575.etc2.stex"
+path.s3tc="res://.import/pixel_moon_spec.png-85d2f669bd5075fe3c67318f799a85bd.s3tc.stex"
+path.etc2="res://.import/pixel_moon_spec.png-85d2f669bd5075fe3c67318f799a85bd.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resources/lunarrock_diffuse.png"
-dest_files=[ "res://.import/lunarrock_diffuse.png-a0e21482d69d766f7b1585d9ec638575.s3tc.stex", "res://.import/lunarrock_diffuse.png-a0e21482d69d766f7b1585d9ec638575.etc2.stex" ]
+source_file="res://resources/pixel_moon_spec.png"
+dest_files=[ "res://.import/pixel_moon_spec.png-85d2f669bd5075fe3c67318f799a85bd.s3tc.stex", "res://.import/pixel_moon_spec.png-85d2f669bd5075fe3c67318f799a85bd.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=true
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
